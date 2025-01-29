@@ -1,0 +1,128 @@
+http://localhost:8080/temas
+
+post
+{
+  "nome": "Astronomia",
+  "descricao": "Questões relacionadas ao estudo do universo."
+}
+-------------------------------------------------------------------
+http://localhost:8080/temas
+get temas
+resultado criado
+
+[
+    {
+        "id": "6798420bb1faea261834ab24",
+        "nome": "Astronomia",
+        "descricao": "Questões relacionadas ao estudo do universo.",
+        "visivel": false,
+        "dataCriacao": "2025-01-27T23:33:47.134",
+        "dataAtualizacao": "2025-01-27T23:33:47.134",
+        "ativo": true
+    }
+]
+
+--------------------------------------------------------------------
+http://localhost:8080/alternativas
+post da requisição de criação
+{
+  "texto": "Terra",
+  "isCorreto": false
+}
+
+{
+  "texto": "Júpiter",
+  "isCorreto": true
+}
+
+{
+  "texto": "Vênus",
+  "isCorreto": false
+}
+
+{
+  "texto": "Saturno",
+  "isCorreto": false
+}
+----------------------------------------------------------
+http://localhost:8080/alternativas
+Get do resultado para trazer as alternativas criadas 
+
+[
+    {
+        "id": "679844a3b1faea261834ab25",
+        "texto": "Terra",
+        "dataCriacao": "2025-01-27T23:44:51.889",
+        "dataAtualizacao": "2025-01-27T23:44:51.889",
+        "ativo": true,
+        "correto": false
+    },
+    {
+        "id": "679844deb1faea261834ab26",
+        "texto": "Júpiter",
+        "dataCriacao": "2025-01-27T23:45:50.977",
+        "dataAtualizacao": "2025-01-27T23:45:50.977",
+        "ativo": true,
+        "correto": false
+    },
+    {
+        "id": "6798451bb1faea261834ab27",
+        "texto": "Saturno",
+        "dataCriacao": "2025-01-27T23:46:51.584",
+        "dataAtualizacao": "2025-01-27T23:46:51.584",
+        "ativo": true,
+        "correto": false
+    },
+    {
+        "id": "679845a0b1faea261834ab28",
+        "texto": "Vênus",
+        "dataCriacao": "2025-01-27T23:49:04.558",
+        "dataAtualizacao": "2025-01-27T23:49:04.558",
+        "ativo": true,
+        "correto": false
+    }
+]
+
+-----------------------------------------------------------------------------------
+http://localhost:8080/questoes
+post questao  - para criação de questão
+   
+   {
+    "titulo": "Qual é o maior planeta do sistema solar?",
+    "enunciado": "Escolha a alternativa correta sobre o maior planeta do sistema solar.",
+    "temaId": "6798420bb1faea261834ab24",
+    "dificuldade": 2,
+    "alternativasIds": [
+        "679844a3b1faea261834ab25",
+		"679844deb1faea261834ab26",
+		"679845a0b1faea261834ab28",
+		"6798451bb1faea261834ab27"
+    ],
+    "visivel": true,
+    "ativo": true
+}
+
+
+-----------------------------------------------------------------------------------------------
+http://localhost:8080/questoes
+get questao - comando para trazer as questões criadas 
+
+[
+    {
+        "id": "6799659f40a5f76b6dc9f8db",
+        "titulo": "Qual é o maior planeta do sistema solar?",
+        "enunciado": "Escolha a alternativa correta sobre o maior planeta do sistema solar.",
+        "temaId": "6798420bb1faea261834ab24",
+        "dificuldade": 2,
+        "alternativasIds": [
+            "679844a3b1faea261834ab25",
+            "679844deb1faea261834ab26",
+            "679845a0b1faea261834ab28",
+            "6798451bb1faea261834ab27"
+        ],
+        "visivel": true,
+        "dataCriacao": "2025-01-28T20:17:51.533",
+        "dataAtualizacao": "2025-01-28T20:17:51.533",
+        "ativo": true
+    }
+]
