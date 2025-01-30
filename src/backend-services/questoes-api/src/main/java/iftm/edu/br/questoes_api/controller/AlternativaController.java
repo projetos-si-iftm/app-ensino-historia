@@ -2,13 +2,14 @@ package iftm.edu.br.questoes_api.controller;
 
 import java.util.List;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import lombok.RequiredArgsConstructor;
 import iftm.edu.br.questoes_api.models.Dto.AlternativaDTO;
 import iftm.edu.br.questoes_api.service.AlternativaService;
 
 @RestController
-@RequestMapping("/alternativas")
+@RequestMapping("/api/alternativas")
 @RequiredArgsConstructor
 public class AlternativaController {
     private final AlternativaService alternativaService;
@@ -19,8 +20,13 @@ public class AlternativaController {
     }
 
     @GetMapping("/{id}")
-    public AlternativaDTO getAlternativaById(@PathVariable String id) {
-        return alternativaService.getAlternativaById(id);
+    public ResponseEntity<AlternativaDTO> getAlternativaById(@PathVariable String id) {
+        AlternativaDTO alternativaDTO = alternativaService.getAlternativaById(id);
+        if (alternativaDTO != null) {
+            return ResponseEntity.ok(alternativaDTO);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @PostMapping
@@ -30,8 +36,23 @@ public class AlternativaController {
     }
 
     @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteAlternativa(@PathVariable String id) {
-        alternativaService.deleteAlternativa(id);
+    public ResponseEntity<Void> deleteAlternativaById(@PathVariable String id) {
+        boolean isDeleted = alternativaService.deleteAlternativaById(id);
+        if (isDeleted) {
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
+
+    @PutMapping("/{id}")
+public ResponseEntity<AlternativaDTO> updateAlternativa(@PathVariable String id, 
+                                                       @RequestBody AlternativaDTO alternativaDTO) {
+    AlternativaDTO updatedAlternativa = alternativaService.updateAlternativa(id, alternativaDTO);
+    if (updatedAlternativa != null) {
+        return ResponseEntity.ok(updatedAlternativa);
+    } else {
+        return ResponseEntity.notFound().build();
+    }
+}
 }

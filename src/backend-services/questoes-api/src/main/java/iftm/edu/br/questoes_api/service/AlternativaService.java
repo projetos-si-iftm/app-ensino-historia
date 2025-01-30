@@ -1,18 +1,21 @@
 package iftm.edu.br.questoes_api.service;
 
-import java.time.LocalDateTime;
-import java.util.List;
-import java.util.stream.Collectors;
-import org.springframework.stereotype.Service;
-import lombok.RequiredArgsConstructor;
 import iftm.edu.br.questoes_api.models.Alternativa;
 import iftm.edu.br.questoes_api.models.Dto.AlternativaDTO;
 import iftm.edu.br.questoes_api.repositories.AlternativaRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
-@RequiredArgsConstructor
 public class AlternativaService {
-    private final AlternativaRepository alternativaRepository;
+
+    @Autowired
+    private AlternativaRepository alternativaRepository;
 
     public List<AlternativaDTO> getAllAlternativas() {
         return alternativaRepository.findAll().stream()
@@ -21,38 +24,47 @@ public class AlternativaService {
     }
 
     public AlternativaDTO getAlternativaById(String id) {
-        Alternativa alternativa = alternativaRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Alternativa não encontrada."));
-        return toDTO(alternativa);
+        Optional<Alternativa> alternativa = alternativaRepository.findById(id);
+        return alternativa.map(this::toDTO).orElse(null);
     }
 
     public AlternativaDTO saveAlternativa(AlternativaDTO alternativaDTO) {
         Alternativa alternativa = toEntity(alternativaDTO);
-        alternativa.setDataCriacao(LocalDateTime.now());
-        alternativa.setDataAtualizacao(LocalDateTime.now());
-        alternativa.setAtivo(true);
         Alternativa savedAlternativa = alternativaRepository.save(alternativa);
         return toDTO(savedAlternativa);
     }
 
-    public AlternativaDTO updateAlternativa(String id, AlternativaDTO alternativaDTO) {
-        Alternativa existingAlternativa = alternativaRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Alternativa não encontrada."));
-        
-        existingAlternativa.setTexto(alternativaDTO.getTexto());
-        existingAlternativa.setCorreto(alternativaDTO.isCorreto());
-        existingAlternativa.setDataAtualizacao(LocalDateTime.now());
-        
-        Alternativa updatedAlternativa = alternativaRepository.save(existingAlternativa);
-        return toDTO(updatedAlternativa);
+    public boolean deleteAlternativaById(String id) {
+        if (alternativaRepository.existsById(id)) {
+            alternativaRepository.deleteById(id);
+            return true;
+        } else {
+            return false;
+        }
     }
 
-    public void deleteAlternativa(String id) {
-        Alternativa alternativa = alternativaRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Alternativa não encontrada."));
-        alternativa.setAtivo(false);
-        alternativa.setDataAtualizacao(LocalDateTime.now());
-        alternativaRepository.save(alternativa);
+    private Alternativa toEntity(AlternativaDTO alternativaDTO) {
+        Alternativa alternativa = new Alternativa();
+        alternativa.setId(alternativaDTO.getId());
+        alternativa.setTexto(alternativaDTO.getTexto());
+        alternativa.setCorreto(alternativaDTO.isCorreto());
+        alternativa.setAtivo(true);
+        
+        // Se for uma nova alternativa (sem ID), inicializa as datas
+        if (alternativaDTO.getId() == null) {
+            alternativa.setDataCriacao(LocalDateTime.now());
+            alternativa.setDataAtualizacao(LocalDateTime.now());
+        } else {
+            // Se for atualização, mantém a data de criação original e atualiza a data de atualização
+            Alternativa existingAlternativa = alternativaRepository.findById(alternativaDTO.getId())
+                    .orElse(null);
+            if (existingAlternativa != null) {
+                alternativa.setDataCriacao(existingAlternativa.getDataCriacao());
+            }
+            alternativa.setDataAtualizacao(LocalDateTime.now());
+        }
+        
+        return alternativa;
     }
 
     private AlternativaDTO toDTO(Alternativa alternativa) {
@@ -66,14 +78,13 @@ public class AlternativaService {
         );
     }
 
-    private Alternativa toEntity(AlternativaDTO dto) {
-        return new Alternativa(
-                dto.getId(),
-                dto.getTexto(),
-                dto.isCorreto(),
-                dto.getDataCriacao(),
-                dto.getDataAtualizacao(),
-                dto.isAtivo()
-        );
+    public AlternativaDTO updateAlternativa(String id, AlternativaDTO alternativaDTO) {
+        if (!alternativaRepository.existsById(id)) {
+            return null;
+        }
+        alternativaDTO.setId(id);
+        Alternativa alternativa = toEntity(alternativaDTO);
+        Alternativa savedAlternativa = alternativaRepository.save(alternativa);
+        return toDTO(savedAlternativa);
     }
 }
