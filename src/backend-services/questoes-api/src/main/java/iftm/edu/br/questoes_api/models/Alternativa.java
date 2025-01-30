@@ -18,9 +18,7 @@ public class Alternativa {
     private String id;
     private String texto;
 
-
-    @Field("correto") // Mapeia o campo correto do banco de dados
-    private boolean isCorreto;
+    private boolean correto;
     private LocalDateTime dataCriacao;
     private LocalDateTime dataAtualizacao;
     private boolean ativo;

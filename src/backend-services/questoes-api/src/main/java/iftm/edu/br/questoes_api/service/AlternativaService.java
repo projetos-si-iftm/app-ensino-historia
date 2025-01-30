@@ -47,15 +47,13 @@ public class AlternativaService {
         Alternativa alternativa = new Alternativa();
         alternativa.setId(alternativaDTO.getId());
         alternativa.setTexto(alternativaDTO.getTexto());
-        alternativa.setCorreto(alternativaDTO.isCorreto());
+        alternativa.setCorreto(alternativaDTO.isCorreto());  
         alternativa.setAtivo(true);
         
-        // Se for uma nova alternativa (sem ID), inicializa as datas
         if (alternativaDTO.getId() == null) {
             alternativa.setDataCriacao(LocalDateTime.now());
             alternativa.setDataAtualizacao(LocalDateTime.now());
         } else {
-            // Se for atualização, mantém a data de criação original e atualiza a data de atualização
             Alternativa existingAlternativa = alternativaRepository.findById(alternativaDTO.getId())
                     .orElse(null);
             if (existingAlternativa != null) {
