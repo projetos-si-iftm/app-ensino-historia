@@ -62,16 +62,12 @@ public class QuestaoService {
         }
         
         questao.setVisivel(dto.isVisivel());
-        questao.setDataCriacao(dto.getDataCriacao());
-        questao.setDataAtualizacao(dto.getDataAtualizacao());
-        questao.setAtivo(dto.isAtivo());
-        
+        questao.setAtivo(true);
         return questao;
     }
 
     public List<QuestaoDTO> getAllQuestoes() {
-        List<Questao> questoes = questaoRepository.findAll();
-        return questoes.stream()
+        return questaoRepository.findAll().stream()
             .map(this::toDTO)
             .collect(Collectors.toList());
     }
@@ -84,58 +80,47 @@ public class QuestaoService {
 
     public QuestaoDTO saveQuestao(QuestaoDTO questaoDTO) {
         try {
-            System.out.println("Iniciando salvamento da questão");
-            
-            // Verifica se o tema existe
             Tema tema = temaRepository.findById(questaoDTO.getTemaId())
                 .orElseThrow(() -> new RuntimeException("Tema não encontrado: " + questaoDTO.getTemaId()));
-            System.out.println("Tema encontrado: " + tema.getId());
             
-            // Verifica se todas as alternativas existem
             List<Alternativa> alternativas = new ArrayList<>();
             for (String alternativaId : questaoDTO.getAlternativasIds()) {
                 Alternativa alternativa = alternativaRepository.findById(alternativaId)
                     .orElseThrow(() -> new RuntimeException("Alternativa não encontrada: " + alternativaId));
                 alternativas.add(alternativa);
             }
-            System.out.println("Alternativas encontradas: " + alternativas.size());
             
             Questao questao = toEntity(questaoDTO);
             questao.setTemaId(tema.getId());
             questao.setAlternativas(alternativas);
-            questao.setDataCriacao(LocalDateTime.now());
+            
+            if (questao.getId() == null) {
+                questao.setDataCriacao(LocalDateTime.now());
+            }
             questao.setDataAtualizacao(LocalDateTime.now());
             
-            Questao savedQuestao = questaoRepository.save(questao);
-            System.out.println("Questão salva com sucesso: " + savedQuestao.getId());
-            
-            return toDTO(savedQuestao);
+            return toDTO(questaoRepository.save(questao));
         } catch (Exception e) {
-            System.err.println("Erro ao salvar questão: " + e.getMessage());
-            e.printStackTrace();
             throw new RuntimeException("Erro ao salvar questão: " + e.getMessage());
         }
     }
 
     public List<QuestaoDTO> getQuestoesByTema(String temaId) {
-        List<Questao> questoes = questaoRepository.findByTemaId(temaId);
-        return questoes.stream()
+        return questaoRepository.findByTemaId(temaId).stream()
             .map(this::toDTO)
             .collect(Collectors.toList());
     }
 
     public List<QuestaoDTO> getQuestoesByDificuldade(int nivel) {
-        List<Questao> questoes = questaoRepository.findByDificuldade(nivel);
-        return questoes.stream()
+        return questaoRepository.findByDificuldade(nivel).stream()
             .map(this::toDTO)
             .collect(Collectors.toList());
     }
 
     public void deleteQuestao(String id) {
-        Questao questao = questaoRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Questão não encontrada."));
-        questao.setAtivo(false);
-        questao.setDataAtualizacao(LocalDateTime.now());
-        questaoRepository.save(questao);
+        if (!questaoRepository.existsById(id)) {
+            throw new RuntimeException("Questão não encontrada: " + id);
+        }
+        questaoRepository.deleteById(id);
     }
 }
