@@ -49,11 +49,10 @@ public class TemaService {
     }
 
     public void deleteTema(String id) {
-        Tema tema = temaRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Tema não encontrado."));
-        tema.setAtivo(false);
-        tema.setDataAtualizacao(LocalDateTime.now());
-        temaRepository.save(tema);
+        if (!temaRepository.existsById(id)) {
+            throw new RuntimeException("Tema não encontrado: " + id);
+        }
+        temaRepository.deleteById(id);
     }
 
     private TemaDTO toDTO(Tema tema) {
