@@ -105,7 +105,7 @@ public class QuestaoService {
                 questao.getId(),
                 questao.getTitulo(),
                 questao.getEnunciado(),
-                questao.getTemaId(),
+                questao.getTemaId(), // Aqui você pode converter o temaId para texto se necessário
                 questao.getDificuldade(),
                 alternativasDTO,
                 questao.isVisivel(),
