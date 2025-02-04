@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
 
 import iftm.edu.br.questoes_api.models.Questao;
+import iftm.edu.br.questoes_api.exceptions.ResourceNotFoundException;
+import iftm.edu.br.questoes_api.exceptions.BadRequestException;
 import iftm.edu.br.questoes_api.models.Alternativa;
 import iftm.edu.br.questoes_api.models.Dto.QuestaoDTO;
 import iftm.edu.br.questoes_api.models.Dto.AlternativaDTO;
@@ -28,12 +30,19 @@ public class QuestaoService {
     }
 
     public QuestaoDTO getQuestaoById(String id) {
-        Questao questao = questaoRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Questão não encontrada."));
-        return toDTO(questao);
+        return questaoRepository.findById(id)
+            .map(this::toDTO)
+            .orElseThrow(() -> new ResourceNotFoundException("Questão não encontrada com ID: " + id));
     }
 
     public QuestaoDTO saveQuestao(QuestaoDTO questaoDTO) {
+        if (questaoDTO.getTitulo() == null || questaoDTO.getTitulo().trim().isEmpty()) {
+            throw new BadRequestException("O título da questão não pode estar vazio");
+        }
+        if (questaoDTO.getAlternativas() == null || questaoDTO.getAlternativas().isEmpty()) {
+            throw new BadRequestException("A questão deve ter pelo menos uma alternativa");
+        }
+
         Questao questao = toEntity(questaoDTO);
         questao.setDataCriacao(LocalDateTime.now());
         questao.setDataAtualizacao(LocalDateTime.now());
@@ -57,7 +66,7 @@ public class QuestaoService {
     public void deleteQuestao(String id) {
         // Busca a questão
         Questao questao = questaoRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Questão não encontrada: " + id));
+        .orElseThrow(() -> new ResourceNotFoundException("Questão não encontrada com ID: " + id));
         
         // Deleta as alternativas associadas
         if (questao.getAlternativas() != null && !questao.getAlternativas().isEmpty()) {

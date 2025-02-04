@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
+import iftm.edu.br.questoes_api.exceptions.ResourceNotFoundException;
+import iftm.edu.br.questoes_api.exceptions.BadRequestException;
 import iftm.edu.br.questoes_api.models.Tema;
 import iftm.edu.br.questoes_api.models.Dto.TemaDTO;
 import iftm.edu.br.questoes_api.repositories.TemaRepository;
@@ -22,11 +24,14 @@ public class TemaService {
 
     public TemaDTO getTemaById(String id) {
         Tema tema = temaRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Tema não encontrado."));
+                .orElseThrow(() -> new ResourceNotFoundException("Tema não encontrado com ID: " + id));
         return toDTO(tema);
     }
 
     public TemaDTO saveTema(TemaDTO temaDTO) {
+        if (temaDTO.getNome() == null || temaDTO.getNome().trim().isEmpty()) {
+            throw new BadRequestException("O nome do tema não pode estar vazio");
+        }
         Tema tema = toEntity(temaDTO);
         tema.setDataCriacao(LocalDateTime.now());
         tema.setDataAtualizacao(LocalDateTime.now());
@@ -36,8 +41,11 @@ public class TemaService {
     }
 
     public TemaDTO updateTema(String id, TemaDTO temaDTO) {
+        if (!temaRepository.existsById(id)) {
+            throw new ResourceNotFoundException("Tema não encontrado com ID: " + id);
+        }
         Tema existingTema = temaRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Tema não encontrado."));
+                .orElseThrow(() -> new ResourceNotFoundException("Tema não encontrado com ID: " + id));
         
         existingTema.setNome(temaDTO.getNome());
         existingTema.setDescricao(temaDTO.getDescricao());
@@ -50,10 +58,11 @@ public class TemaService {
 
     public void deleteTema(String id) {
         if (!temaRepository.existsById(id)) {
-            throw new RuntimeException("Tema não encontrado: " + id);
+            throw new ResourceNotFoundException("Tema não encontrado com ID: " + id);
         }
         temaRepository.deleteById(id);
     }
+
 
     private TemaDTO toDTO(Tema tema) {
         return new TemaDTO(
