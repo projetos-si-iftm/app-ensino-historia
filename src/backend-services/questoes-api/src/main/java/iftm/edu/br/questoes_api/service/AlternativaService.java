@@ -3,6 +3,8 @@ package iftm.edu.br.questoes_api.service;
 import iftm.edu.br.questoes_api.models.Alternativa;
 import iftm.edu.br.questoes_api.models.Dto.AlternativaDTO;
 import iftm.edu.br.questoes_api.repositories.AlternativaRepository;
+import iftm.edu.br.questoes_api.exceptions.ResourceNotFoundException;
+import iftm.edu.br.questoes_api.exceptions.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,23 +26,36 @@ public class AlternativaService {
     }
 
     public AlternativaDTO getAlternativaById(String id) {
-        Optional<Alternativa> alternativa = alternativaRepository.findById(id);
-        return alternativa.map(this::toDTO).orElse(null);
+        return alternativaRepository.findById(id)
+            .map(this::toDTO)
+            .orElseThrow(() -> new ResourceNotFoundException("Alternativa não encontrada com ID: " + id));
     }
 
     public AlternativaDTO saveAlternativa(AlternativaDTO alternativaDTO) {
+        if (alternativaDTO.getTexto() == null || alternativaDTO.getTexto().trim().isEmpty()) {
+            throw new BadRequestException("O texto da alternativa não pode estar vazio");
+        }
         Alternativa alternativa = toEntity(alternativaDTO);
         Alternativa savedAlternativa = alternativaRepository.save(alternativa);
         return toDTO(savedAlternativa);
     }
 
     public boolean deleteAlternativaById(String id) {
-        if (alternativaRepository.existsById(id)) {
-            alternativaRepository.deleteById(id);
-            return true;
-        } else {
-            return false;
+        if (!alternativaRepository.existsById(id)) {
+            throw new ResourceNotFoundException("Alternativa não encontrada com ID: " + id);
         }
+        alternativaRepository.deleteById(id);
+        return true;
+    }
+
+    public AlternativaDTO updateAlternativa(String id, AlternativaDTO alternativaDTO) {
+        if (!alternativaRepository.existsById(id)) {
+            throw new ResourceNotFoundException("Alternativa não encontrada com ID: " + id);
+        }
+        alternativaDTO.setId(id);
+        Alternativa alternativa = toEntity(alternativaDTO);
+        Alternativa savedAlternativa = alternativaRepository.save(alternativa);
+        return toDTO(savedAlternativa);
     }
 
     private Alternativa toEntity(AlternativaDTO alternativaDTO) {
@@ -74,15 +89,5 @@ public class AlternativaService {
                 alternativa.getDataAtualizacao(),
                 alternativa.isAtivo()
         );
-    }
-
-    public AlternativaDTO updateAlternativa(String id, AlternativaDTO alternativaDTO) {
-        if (!alternativaRepository.existsById(id)) {
-            return null;
-        }
-        alternativaDTO.setId(id);
-        Alternativa alternativa = toEntity(alternativaDTO);
-        Alternativa savedAlternativa = alternativaRepository.save(alternativa);
-        return toDTO(savedAlternativa);
     }
 }
