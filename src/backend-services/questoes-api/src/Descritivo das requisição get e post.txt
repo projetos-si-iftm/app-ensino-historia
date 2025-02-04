@@ -12,18 +12,18 @@ resultado criado
 
 [
     {
-        "id": "6798420bb1faea261834ab24",
+        "id": "679d5971f407da6328b55882",
         "nome": "Astronomia",
         "descricao": "Questões relacionadas ao estudo do universo.",
         "visivel": false,
-        "dataCriacao": "2025-01-27T23:33:47.134",
-        "dataAtualizacao": "2025-01-27T23:33:47.134",
+        "dataCriacao": "2025-01-31T20:14:57.172",
+        "dataAtualizacao": "2025-01-31T20:14:57.172",
         "ativo": true
     }
 ]
 
 --------------------------------------------------------------------
-http://localhost:8080/alternativas
+http://localhost:8080/api/alternativas
 post da requisição de criação
 {
   "texto": "Terra",
@@ -50,36 +50,36 @@ Get do resultado para trazer as alternativas criadas
 
 [
     {
-        "id": "679844a3b1faea261834ab25",
+        "id": "679d5bd9f407da6328b55884",
         "texto": "Terra",
-        "dataCriacao": "2025-01-27T23:44:51.889",
-        "dataAtualizacao": "2025-01-27T23:44:51.889",
+        "dataCriacao": "2025-01-31T20:25:13.337",
+        "dataAtualizacao": "2025-01-31T20:25:13.337",
         "ativo": true,
-        "correto": false
+        "isCorreto": false
     },
     {
-        "id": "679844deb1faea261834ab26",
+        "id": "679d5bf3f407da6328b55885",
         "texto": "Júpiter",
-        "dataCriacao": "2025-01-27T23:45:50.977",
-        "dataAtualizacao": "2025-01-27T23:45:50.977",
+        "dataCriacao": "2025-01-31T20:25:39.065",
+        "dataAtualizacao": "2025-01-31T20:25:39.065",
         "ativo": true,
-        "correto": false
+        "isCorreto": true
     },
     {
-        "id": "6798451bb1faea261834ab27",
-        "texto": "Saturno",
-        "dataCriacao": "2025-01-27T23:46:51.584",
-        "dataAtualizacao": "2025-01-27T23:46:51.584",
-        "ativo": true,
-        "correto": false
-    },
-    {
-        "id": "679845a0b1faea261834ab28",
+        "id": "679d5c00f407da6328b55886",
         "texto": "Vênus",
-        "dataCriacao": "2025-01-27T23:49:04.558",
-        "dataAtualizacao": "2025-01-27T23:49:04.558",
+        "dataCriacao": "2025-01-31T20:25:52.934",
+        "dataAtualizacao": "2025-01-31T20:25:52.934",
         "ativo": true,
-        "correto": false
+        "isCorreto": false
+    },
+    {
+        "id": "679d5c0ef407da6328b55887",
+        "texto": "Saturno",
+        "dataCriacao": "2025-01-31T20:26:06.124",
+        "dataAtualizacao": "2025-01-31T20:26:06.124",
+        "ativo": true,
+        "isCorreto": false
     }
 ]
 
@@ -90,13 +90,13 @@ post questao  - para criação de questão
    {
     "titulo": "Qual é o maior planeta do sistema solar?",
     "enunciado": "Escolha a alternativa correta sobre o maior planeta do sistema solar.",
-    "temaId": "6798420bb1faea261834ab24",
+    "temaId": "679d5971f407da6328b55882",
     "dificuldade": 2,
     "alternativasIds": [
-        "679844a3b1faea261834ab25",
-		"679844deb1faea261834ab26",
-		"679845a0b1faea261834ab28",
-		"6798451bb1faea261834ab27"
+        "679d5bd9f407da6328b55884",
+		"679d5bf3f407da6328b55885",
+		"679d5c00f407da6328b55886",
+		"679d5c0ef407da6328b55887"
     ],
     "visivel": true,
     "ativo": true

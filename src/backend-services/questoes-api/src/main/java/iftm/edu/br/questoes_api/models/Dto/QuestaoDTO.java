@@ -15,7 +15,7 @@ public class QuestaoDTO {
     private String enunciado;
     private String temaId;
     private int dificuldade;
-    private List<String> alternativasIds;
+    private List<AlternativaDTO> alternativas;
     private boolean visivel;
     private LocalDateTime dataCriacao;
     private LocalDateTime dataAtualizacao;
