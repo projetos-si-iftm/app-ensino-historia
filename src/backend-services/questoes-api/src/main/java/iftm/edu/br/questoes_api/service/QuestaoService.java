@@ -54,38 +54,17 @@ public class QuestaoService {
         return toDTO(savedQuestao);
     }
 
-    public QuestaoDTO updateQuestao(String id, QuestaoDTO questaoDTO) {
-        Questao existingQuestao = questaoRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Questão não encontrada."));
-
-        existingQuestao.setTitulo(questaoDTO.getTitulo());
-        existingQuestao.setEnunciado(questaoDTO.getEnunciado());
-        existingQuestao.setTemaId(questaoDTO.getTemaId());
-        existingQuestao.setDificuldade(questaoDTO.getDificuldade());
-        existingQuestao.setVisivel(questaoDTO.isVisivel());
-        existingQuestao.setAtivo(questaoDTO.isAtivo());
-        existingQuestao.setDataAtualizacao(LocalDateTime.now());
-
-        List<Alternativa> alternativas = new ArrayList<>();
-        for (AlternativaDTO alternativaDTO : questaoDTO.getAlternativas()) {
-            Alternativa alternativa = new Alternativa();
-            alternativa.setTexto(alternativaDTO.getTexto());
-            alternativa.setCorreto(alternativaDTO.isCorreto());
-            alternativa.setDataCriacao(LocalDateTime.now());
-            alternativa.setDataAtualizacao(LocalDateTime.now());
-            alternativa = alternativaRepository.save(alternativa);
-            alternativas.add(alternativa);
-        }
-        existingQuestao.setAlternativas(alternativas);
-
-        Questao updatedQuestao = questaoRepository.save(existingQuestao);
-        return toDTO(updatedQuestao);
-    }
-
     public void deleteQuestao(String id) {
-        if (!questaoRepository.existsById(id)) {
-            throw new RuntimeException("Questão não encontrada: " + id);
+        // Busca a questão
+        Questao questao = questaoRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Questão não encontrada: " + id));
+        
+        // Deleta as alternativas associadas
+        if (questao.getAlternativas() != null && !questao.getAlternativas().isEmpty()) {
+            alternativaRepository.deleteAll(questao.getAlternativas());
         }
+        
+        // Deleta a questão
         questaoRepository.deleteById(id);
     }
 
@@ -105,7 +84,7 @@ public class QuestaoService {
                 questao.getId(),
                 questao.getTitulo(),
                 questao.getEnunciado(),
-                questao.getTemaId(), // Aqui você pode converter o temaId para texto se necessário
+                questao.getTemaId(),
                 questao.getDificuldade(),
                 alternativasDTO,
                 questao.isVisivel(),
