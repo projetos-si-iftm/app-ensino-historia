@@ -31,16 +31,19 @@ public class AuthorizationService {
   private MongoTemplate mongoTemplate;
 
   @Autowired
+  private TokenService tokenService;
+
+  @Autowired
   UserRepository userRepository;
 
 
   public LoginResponseDTO login(LoginDTO loginDTO) {
     var usernamePassword = new UsernamePasswordAuthenticationToken(loginDTO.getEmail(), loginDTO.getPassword());
     var auth = authenticationManager.authenticate(usernamePassword);
-    //var token = tokenService.generateToken((User) auth.getPrincipal());
+    var token = tokenService.generateToken((User) auth.getPrincipal());
 
     return LoginResponseDTO.builder()
-        .token("")
+        .token(token)
         .build();
   }
 
