@@ -1,7 +1,7 @@
 package com.nataliaarantes.iftm.controller;
 
 
-import com.nataliaarantes.iftm.model.dto.ValidateTokenDTO;
+import com.nataliaarantes.iftm.model.dto.token.ValidateTokenDTO;
 import com.nataliaarantes.iftm.model.dto.login.LoginDTO;
 import com.nataliaarantes.iftm.model.dto.login.LoginResponseDTO;
 import com.nataliaarantes.iftm.model.dto.register.RegisterDTO;
