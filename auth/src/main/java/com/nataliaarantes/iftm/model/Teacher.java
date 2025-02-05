@@ -9,7 +9,6 @@ import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
 @Document(collection = "users")
-@Builder
 @Getter
 @Setter
 public class Teacher extends User {

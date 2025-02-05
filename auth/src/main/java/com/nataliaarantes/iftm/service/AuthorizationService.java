@@ -6,6 +6,7 @@ import com.nataliaarantes.iftm.model.User;
 import com.nataliaarantes.iftm.model.dto.login.LoginDTO;
 import com.nataliaarantes.iftm.model.dto.login.LoginResponseDTO;
 import com.nataliaarantes.iftm.model.dto.register.RegisterDTO;
+import com.nataliaarantes.iftm.model.dto.register.RegisterResponseDTO;
 import com.nataliaarantes.iftm.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -14,17 +15,14 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 
 import java.util.Optional;
 
-public class AuthorizationService implements UserDetailsService {
-  @Autowired
-  UserRepository userRepository;
+@Service
+public class AuthorizationService {
 
   @Autowired
   private AuthenticationManager authenticationManager;
@@ -32,10 +30,9 @@ public class AuthorizationService implements UserDetailsService {
   @Autowired
   private MongoTemplate mongoTemplate;
 
-  @Override
-  public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-    return userRepository.findByEmail(username).orElseThrow(() -> new HttpClientErrorException(HttpStatusCode.valueOf(404), "User not found"));
-  }
+  @Autowired
+  UserRepository userRepository;
+
 
   public LoginResponseDTO login(LoginDTO loginDTO) {
     var usernamePassword = new UsernamePasswordAuthenticationToken(loginDTO.getEmail(), loginDTO.getPassword());
@@ -47,7 +44,7 @@ public class AuthorizationService implements UserDetailsService {
         .build();
   }
 
-  public String register(RegisterDTO registerDTO) {
+  public RegisterResponseDTO register(RegisterDTO registerDTO) {
     Optional<User> user = userRepository.findByEmail(registerDTO.getEmail());
     if (user.isPresent()) {
       throw new HttpClientErrorException(HttpStatusCode.valueOf(400), "Email already exists");
@@ -57,8 +54,12 @@ public class AuthorizationService implements UserDetailsService {
     User userObj = initializeUser(registerDTO.withPassword(encryptedPassword));
 
     User save = userRepository.save(userObj);
-
-    return null;
+    return RegisterResponseDTO.builder()
+        .uuid(save.getUuid())
+        .email(save.getEmail())
+        .name(save.getName())
+        .isTeacher(registerDTO.isTeacher())
+        .build();
   }
 
   private User initializeUser(RegisterDTO registerDTO) {

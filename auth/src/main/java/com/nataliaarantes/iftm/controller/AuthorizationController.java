@@ -3,7 +3,10 @@ package com.nataliaarantes.iftm.controller;
 
 import com.nataliaarantes.iftm.model.dto.login.LoginDTO;
 import com.nataliaarantes.iftm.model.dto.login.LoginResponseDTO;
+import com.nataliaarantes.iftm.model.dto.register.RegisterDTO;
+import com.nataliaarantes.iftm.model.dto.register.RegisterResponseDTO;
 import com.nataliaarantes.iftm.service.AuthorizationService;
+import com.nataliaarantes.iftm.service.SecurityAuthorizationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
@@ -19,8 +22,6 @@ public class AuthorizationController {
   @Autowired
   private AuthorizationService authorizationService;
 
-//  @Autowired
-//  private TokenService tokenService;
 
   @PostMapping("/login")
   public ResponseEntity<LoginResponseDTO> login(@RequestBody LoginDTO requestBody){
@@ -29,15 +30,8 @@ public class AuthorizationController {
   }
 
   @PostMapping("/register")
-  public ResponseEntity register(){
-//    if(this.repository.findByLogin(data.login()) != null) return ResponseEntity.badRequest().build();
-//
-//    String encryptedPassword = new BCryptPasswordEncoder().encode(data.password());
-//    User newUser = new User(data.login(), encryptedPassword, data.role());
-//
-//    this.repository.save(newUser);
-//
-//    return ResponseEntity.ok().build();
-    return null;
+  public ResponseEntity<RegisterResponseDTO> register(@RequestBody RegisterDTO requestBody){
+    var response = authorizationService.register(requestBody);
+    return new ResponseEntity<>(response, HttpStatusCode.valueOf(201));
   }
 }
