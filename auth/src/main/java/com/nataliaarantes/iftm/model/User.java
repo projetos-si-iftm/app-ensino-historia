@@ -1,8 +1,6 @@
 package com.nataliaarantes.iftm.model;
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -10,10 +8,17 @@ import org.springframework.data.mongodb.core.mapping.Field;
 import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 
-@Data
-@NoArgsConstructor
+@Getter
+@Setter
 @Document(collection = "users")
 public abstract class User implements UserDetails {
+
+  public User(String name, String email, String password, Boolean isActive) {
+    this.name = name;
+    this.email = email;
+    this.password = password;
+    this.isActive = isActive != null ? isActive : true;
+  }
 
   @Id
   private String uuid;

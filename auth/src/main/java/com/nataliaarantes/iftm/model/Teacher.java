@@ -7,15 +7,20 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import java.util.Collection;
 import java.util.List;
 
-@Data
-@AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 @Document(collection = "users")
 @Builder
+@Getter
+@Setter
 public class Teacher extends User {
+
+  public Teacher(String name, String email, String password, Boolean isActive) {
+    super(name, email, password, isActive);
+  }
 
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
+
     return List.of(
         new SimpleGrantedAuthority("ROLE_ADMIN"),
         new SimpleGrantedAuthority("ROLE_USER")

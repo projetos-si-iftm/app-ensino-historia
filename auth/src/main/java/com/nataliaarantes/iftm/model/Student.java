@@ -8,13 +8,15 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import java.util.Collection;
 import java.util.List;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 @Document(collection = "users")
+@Getter
 @Setter
 public class Student extends User {
+  public Student(String name, String email, String password, Boolean isActive, String classId) {
+    super(name, email, password, isActive);
+    this.classId = classId;
+  }
 
   @Field("class_id")
   private String classId;
