@@ -7,6 +7,7 @@ import com.nataliaarantes.iftm.model.dto.login.LoginDTO;
 import com.nataliaarantes.iftm.model.dto.login.LoginResponseDTO;
 import com.nataliaarantes.iftm.model.dto.register.RegisterDTO;
 import com.nataliaarantes.iftm.model.dto.register.RegisterResponseDTO;
+import com.nataliaarantes.iftm.repository.ClassroomRepository;
 import com.nataliaarantes.iftm.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -35,6 +36,9 @@ public class AuthorizationService {
 
   @Autowired
   UserRepository userRepository;
+
+  @Autowired
+  private ClassroomRepository classroomRepository;
 
 
   public LoginResponseDTO login(LoginDTO loginDTO) {
@@ -76,6 +80,7 @@ public class AuthorizationService {
       );
     }
 
+    verifyClassId(registerDTO.getClassId());
     return new Student(
         registerDTO.getName(),
         registerDTO.getEmail(),
@@ -89,6 +94,12 @@ public class AuthorizationService {
     Query query = new Query(Criteria.where("email").is(email));
     if(!mongoTemplate.exists(query, "teacher_mails")) {
       throw new HttpClientErrorException(HttpStatusCode.valueOf(403), "This user cannot register as a teacher");
+    }
+  }
+
+  private void verifyClassId(String classId) {
+    if(classroomRepository.findByUuid(classId).isEmpty()) {
+      throw new HttpClientErrorException(HttpStatusCode.valueOf(400), "Invalid class id");
     }
   }
 }

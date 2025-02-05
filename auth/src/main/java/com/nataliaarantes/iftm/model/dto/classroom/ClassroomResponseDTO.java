@@ -1,20 +1,22 @@
 package com.nataliaarantes.iftm.model.dto.classroom;
 
 import com.nataliaarantes.iftm.model.Classroom;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.nataliaarantes.iftm.model.dto.Student.StudentResponseDTO;
+import lombok.*;
+
+import java.util.List;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@With
 public class ClassroomResponseDTO {
   private String uuid;
   private String name;
   private String year;
   private boolean isActive;
+  private List<StudentResponseDTO> students;
 
 
   public static ClassroomResponseDTO modelToResponseDto(Classroom model) {
