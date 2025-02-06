@@ -1,7 +1,7 @@
 package com.nataliaarantes.iftm.model.dto.classroom;
 
 import com.nataliaarantes.iftm.model.Classroom;
-import com.nataliaarantes.iftm.model.dto.Student.StudentResponseDTO;
+import com.nataliaarantes.iftm.model.dto.user.Student.StudentResponseDTO;
 import lombok.*;
 
 import java.util.List;

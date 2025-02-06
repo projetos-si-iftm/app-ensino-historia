@@ -1,7 +1,7 @@
 package com.nataliaarantes.iftm.service;
 
 import com.nataliaarantes.iftm.model.Classroom;
-import com.nataliaarantes.iftm.model.dto.Student.StudentResponseDTO;
+import com.nataliaarantes.iftm.model.dto.user.Student.StudentResponseDTO;
 import com.nataliaarantes.iftm.model.dto.classroom.ClassroomDTO;
 import com.nataliaarantes.iftm.model.dto.classroom.ClassroomResponseDTO;
 import com.nataliaarantes.iftm.repository.ClassroomRepository;
