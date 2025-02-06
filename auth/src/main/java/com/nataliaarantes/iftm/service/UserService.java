@@ -7,6 +7,7 @@ import com.nataliaarantes.iftm.model.dto.user.Student.StudentResponseDTO;
 import com.nataliaarantes.iftm.model.dto.user.Teacher.TeacherResponseDTO;
 import com.nataliaarantes.iftm.model.dto.user.UserDTO;
 import com.nataliaarantes.iftm.model.dto.user.UserResponseDTO;
+import com.nataliaarantes.iftm.repository.ClassroomRepository;
 import com.nataliaarantes.iftm.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatusCode;
@@ -24,6 +25,9 @@ public class UserService {
   UserRepository userRepository;
 
   @Autowired
+  ClassroomRepository classroomRepository;
+
+  @Autowired
   TokenService tokenService;
 
 
@@ -34,10 +38,13 @@ public class UserService {
     }
 
     User user = userRepository.findByEmail(email).orElseThrow(RuntimeException::new);
+    boolean isStudent = user.getClass() == Student.class;
+
     if(dto.getName() != null) {
       user.setName(dto.getName());
     }
-    if(dto.getEmail() != null){
+
+    if(dto.getEmail() != null) {
       Optional<User> byEmail = userRepository.findByEmail(dto.getEmail());
 
       if(byEmail.isPresent()) {
@@ -46,18 +53,18 @@ public class UserService {
 
       user.setEmail(dto.getEmail());
     }
+
     if(dto.getPassword() != null) {
       String encryptedPassword = new BCryptPasswordEncoder().encode(dto.getPassword());
       user.setPassword(encryptedPassword);
     }
 
-    if(dto.getClassId() != null && user.getClass() == Student.class) {
+    if(dto.getClassId() != null && isStudent) {
+      classroomRepository.findByUuid(dto.getClassId()).orElseThrow(() -> new HttpClientErrorException(HttpStatusCode.valueOf(400), "Invalid classroom"));
       ((Student) user).setClassId(dto.getClassId());
     }
 
     user = userRepository.save(user);
-
-    return user.getClass() == Student.class ?
-        StudentResponseDTO.modelToDto((Student) user) : TeacherResponseDTO.modelToDto((Teacher) user);
+    return isStudent ? StudentResponseDTO.modelToDto((Student) user) : TeacherResponseDTO.modelToDto((Teacher) user);
   }
 }
