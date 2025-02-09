@@ -1,0 +1,144 @@
+{
+	"info": {
+		"_postman_id": "bfb911b9-fb91-496a-99c5-7fc6cf9187c2",
+		"name": "respostas-api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26235161"
+	},
+	"item": [
+		{
+			"name": "Criar Resposta",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"alunoId\": \"550e8400-e29b-41d4-a716-446655440000\",\r\n  \"questaoId\": \"550e8400-e29b-41d4-a716-446655440001\",\r\n  \"alternativaId\": \"550e8400-e29b-41d4-a716-446655440002\",\r\n  \"dataInicio\": \"2024-02-20T10:00:00\",\r\n  \"dataFim\": \"2024-02-20T10:05:00\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/respostas",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"respostas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Respostas",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/respostas",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"respostas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Resposta por ID",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/respostas/67a91c2b694cd8252ca63113",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"respostas",
+						"67a91c2b694cd8252ca63113"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Desativar resposta por ID",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/respostas/67a90dde27de0e5920e0e24a",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"respostas",
+						"67a90dde27de0e5920e0e24a"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET resposta por aluno",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/respostas/aluno/550e8400-e29b-41d4-a716-446655440000",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"respostas",
+						"aluno",
+						"550e8400-e29b-41d4-a716-446655440000"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
