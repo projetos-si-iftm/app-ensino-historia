@@ -26,6 +26,7 @@ Esta documentação apresenta instruções claras de uso, os formatos esperados 
 - [Pré-requisitos](#pré-requisitos)
 - [Configuração do Projeto](#configuração-do-projeto)
 - [Execução](#execução)
+- [Diagrama da Arquitetura de Dados](#diagrama)
 - [Endpoints](#endpoints)
   - [Criar Resposta](#criar-resposta)
   - [Listar Todas as Respostas](#listar-todas-as-respostas)
@@ -76,6 +77,12 @@ Para compilar e executar o projeto, siga os passos abaixo:
    A aplicação será iniciada na porta **8080**.
 
 ---
+
+## Diagrama da Arquitetura de Dados
+
+Desenho considerando a integração com os serviços de questões e autenticação.
+
+![Diagrama da Arquitetura de Dados](diagramaDados.png)
 
 ## Endpoints
 
