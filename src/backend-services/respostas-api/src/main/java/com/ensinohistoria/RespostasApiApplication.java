@@ -1,4 +1,4 @@
-package com.lucashumberto.respostas_api;
+package com.ensinohistoria;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
