@@ -19,6 +19,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.HttpServerErrorException;
 
 import java.util.Optional;
 
@@ -49,6 +50,29 @@ public class AuthorizationService {
     return LoginResponseDTO.builder()
         .token(token)
         .build();
+  }
+
+  public LoginResponseDTO loginWithGoogle(RegisterDTO registerDTO) {
+    Optional<User> user = userRepository.findByEmail(registerDTO.getEmail());
+    if(user.isPresent()) {
+      String token = tokenService.generateToken(user.get());
+      return new LoginResponseDTO(token);
+    }
+
+    boolean isTeacher = false;
+    try {
+      isValidTeacherEmail(registerDTO.getEmail());
+      isTeacher = true;
+    } catch (HttpClientErrorException e) { }
+
+    registerDTO.setTeacher(isTeacher);
+    registerDTO.setPassword("jss-google-login");
+    register(registerDTO);
+
+    User registredUser = userRepository.findByEmail(registerDTO.getEmail())
+        .orElseThrow(() -> new HttpServerErrorException(HttpStatusCode.valueOf(500), "Internal error"));
+
+    return new LoginResponseDTO(tokenService.generateToken(registredUser));
   }
 
   public RegisterResponseDTO register(RegisterDTO registerDTO) {
@@ -98,7 +122,7 @@ public class AuthorizationService {
   }
 
   private void verifyClassId(String classId) {
-    if(classroomRepository.findByUuid(classId).isEmpty()) {
+    if(classId != null && classroomRepository.findByUuid(classId).isEmpty()) {
       throw new HttpClientErrorException(HttpStatusCode.valueOf(400), "Invalid class id");
     }
   }

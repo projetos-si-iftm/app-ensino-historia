@@ -9,12 +9,12 @@ import com.nataliaarantes.iftm.model.dto.register.RegisterResponseDTO;
 import com.nataliaarantes.iftm.service.AuthorizationService;
 import com.nataliaarantes.iftm.service.TokenService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.core.user.OAuth2User;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Objects;
 
@@ -47,5 +47,11 @@ public class AuthorizationController {
     var isValid = !Objects.equals(response, "");
 
     return new ResponseEntity<>(isValid, HttpStatusCode.valueOf(200));
+  }
+
+  @PostMapping("/google")
+  public ResponseEntity<LoginResponseDTO> googleLogin(RegisterDTO registerDTO) {
+    LoginResponseDTO response = authorizationService.loginWithGoogle(registerDTO);
+    return ResponseEntity.ok(response);
   }
 }
