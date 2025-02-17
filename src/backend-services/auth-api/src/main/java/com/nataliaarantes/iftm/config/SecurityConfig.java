@@ -56,23 +56,25 @@ public class SecurityConfig {
             .requestMatchers(HttpMethod.DELETE, "/classroom").hasRole("ADMIN")
             .anyRequest().authenticated()
         )
-        .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
         .oauth2Login(httpSecurityOAuth2LoginConfigurer ->
-          httpSecurityOAuth2LoginConfigurer.successHandler(((request, response, authentication) -> {
-            request.getSession().invalidate();
+            httpSecurityOAuth2LoginConfigurer.successHandler(((request, response, authentication) -> {
+              Map<String, Object> attributes = ((DefaultOAuth2User) authentication.getPrincipal()).getAttributes();
+              String email = (String) attributes.get("email");
+              String name = (String) attributes.get("name");
 
-            Map<String, Object> attributes = ((DefaultOAuth2User) authentication.getPrincipal()).getAttributes();
-            String email = (String) attributes.get("email");
-            String name = (String) attributes.get("name");
+              RegisterDTO registerDTO = new RegisterDTO(name, email,null, false, null);
+              LoginResponseDTO loginResponseDTO = authorizationService.loginWithGoogle(registerDTO);
 
-            RegisterDTO registerDTO = new RegisterDTO(name, email,null, false, null);
-            LoginResponseDTO loginResponseDTO = authorizationService.loginWithGoogle(registerDTO);
-
-            response.setContentType("application/json");
-            response.getWriter().write(new ObjectMapper().writeValueAsString(loginResponseDTO));
-            response.getWriter().flush();
-          }))
+              response.setContentType("application/json");
+              response.getWriter().write(new ObjectMapper().writeValueAsString(loginResponseDTO));
+              response.getWriter().flush();
+            }))
         )
+        .exceptionHandling(exceptionHandling -> exceptionHandling
+            .authenticationEntryPoint(new CustomAuthenticationEntryPoint())
+            .accessDeniedHandler(new CustomAccessDeniedHandler())
+        )
+        .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
         .build();
   }
 
