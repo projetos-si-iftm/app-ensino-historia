@@ -11,6 +11,7 @@ import com.nataliaarantes.iftm.model.dto.classroom.ClassroomResponseDTO;
 import com.nataliaarantes.iftm.repository.ClassroomRepository;
 import com.nataliaarantes.iftm.repository.UserRepository;
 import com.nataliaarantes.iftm.service.ClassroomService;
+import com.nataliaarantes.iftm.service.TokenService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -31,6 +32,9 @@ class ClassroomServiceTest {
 
   @Mock
   private UserRepository userRepository;
+
+  @Mock
+  private TokenService tokenService;
 
   @InjectMocks
   private ClassroomService classroomService;
