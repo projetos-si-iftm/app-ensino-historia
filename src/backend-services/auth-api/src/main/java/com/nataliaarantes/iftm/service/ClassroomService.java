@@ -1,6 +1,7 @@
 package com.nataliaarantes.iftm.service;
 
 import com.nataliaarantes.iftm.model.Classroom;
+import com.nataliaarantes.iftm.model.Student;
 import com.nataliaarantes.iftm.model.dto.user.Student.StudentResponseDTO;
 import com.nataliaarantes.iftm.model.dto.classroom.ClassroomDTO;
 import com.nataliaarantes.iftm.model.dto.classroom.ClassroomResponseDTO;
@@ -23,13 +24,17 @@ public class ClassroomService {
   @Autowired
   private UserRepository userRepository;
 
+  @Autowired
+  private TokenService tokenService;
 
-  public ClassroomResponseDTO create(ClassroomDTO classroomDTO) {
+
+  public ClassroomResponseDTO create(ClassroomDTO classroomDTO, String token) {
     Optional<Classroom> classroom = classroomRepository.findByName(classroomDTO.getName());
     if (classroom.isPresent()) {
       throw new HttpClientErrorException(HttpStatusCode.valueOf(400), "Classroom already exists");
     }
 
+    verifyIsTeacher(token);
     Classroom model = Classroom.dtoToMode(classroomDTO);
     model = classroomRepository.save(model);
 
@@ -57,10 +62,12 @@ public class ClassroomService {
         .toList();
   }
 
-  public ClassroomResponseDTO update(String uuid, ClassroomDTO dto) {
+  public ClassroomResponseDTO update(String uuid, ClassroomDTO dto, String token) {
+
     Classroom classroom = classroomRepository.findByUuid(uuid)
         .orElseThrow(() -> new HttpClientErrorException(HttpStatusCode.valueOf(404), "Class not found"));
 
+    verifyIsTeacher(token);
     if (dto.getName() != null) {
       classroom.setName(dto.getName());
     }
@@ -73,10 +80,11 @@ public class ClassroomService {
     return ClassroomResponseDTO.modelToResponseDto(classroom);
   }
 
-  public void delete(String uuid) {
+  public void delete(String uuid, String token) {
     Classroom classroom = classroomRepository.findByUuid(uuid)
         .orElseThrow(() -> new HttpClientErrorException(HttpStatusCode.valueOf(404), "Class not found"));
 
+    verifyIsTeacher(token);
     classroomRepository.delete(classroom);
   }
 
@@ -85,6 +93,13 @@ public class ClassroomService {
     return userRepository.findByClassId(uuid).stream()
         .map(StudentResponseDTO::modelToDto)
         .toList();
+  }
+
+  private void verifyIsTeacher(String token) {
+    String email = tokenService.validateToken(token.replace("Bearer ", ""));
+    if(userRepository.findByEmail(email).get().getClass() == Student.class){
+      throw new HttpClientErrorException(HttpStatusCode.valueOf(403), "Student cant manipulate classroom data");
+    }
   }
 
 }
