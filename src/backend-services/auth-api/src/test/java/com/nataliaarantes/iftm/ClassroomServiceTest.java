@@ -59,6 +59,8 @@ class ClassroomServiceTest {
   void testCreateClassroomAsTeacher() {
     when(classroomRepository.findByName(classroomDTO.getName())).thenReturn(Optional.empty());
     when(classroomRepository.save(any(Classroom.class))).thenReturn(classroom);
+    when(tokenService.validateToken(token)).thenReturn(teacher.getEmail());
+    when(userRepository.findByEmail(teacher.getEmail())).thenReturn(Optional.ofNullable(teacher));
 
     ClassroomResponseDTO response = classroomService.create(classroomDTO, token);
 
@@ -112,6 +114,8 @@ class ClassroomServiceTest {
   void testUpdateClassroomAsTeacher() {
     when(classroomRepository.findByUuid("1")).thenReturn(Optional.of(classroom));
     when(classroomRepository.save(any(Classroom.class))).thenReturn(classroom);
+    when(tokenService.validateToken(token)).thenReturn(teacher.getEmail());
+    when(userRepository.findByEmail(teacher.getEmail())).thenReturn(Optional.ofNullable(teacher));
 
     ClassroomResponseDTO response = classroomService.update("1", classroomDTO, token);
 
@@ -133,6 +137,8 @@ class ClassroomServiceTest {
   void testDeleteClassroomAsTeacher() {
     when(classroomRepository.findByUuid("1")).thenReturn(Optional.of(classroom));
     doNothing().when(classroomRepository).delete(any(Classroom.class));
+    when(tokenService.validateToken(token)).thenReturn(teacher.getEmail());
+    when(userRepository.findByEmail(teacher.getEmail())).thenReturn(Optional.ofNullable(teacher));
 
     assertDoesNotThrow(() -> classroomService.delete("1", token));
   }
