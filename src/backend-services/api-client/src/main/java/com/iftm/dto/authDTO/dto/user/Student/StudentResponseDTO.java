@@ -1,8 +1,7 @@
-package com.nataliaarantes.iftm.model.dto.user.Student;
+package com.iftm.dto.authDTO.dto.user.Student;
 
-import com.nataliaarantes.iftm.model.Student;
-import com.nataliaarantes.iftm.model.dto.user.UserResponseDTO;
 import lombok.*;
+import com.iftm.dto.authDTO.dto.user.UserResponseDTO;
 
 @Getter
 @Setter
@@ -13,15 +12,4 @@ public class StudentResponseDTO extends UserResponseDTO {
   }
 
   private String classId;
-
-  public static StudentResponseDTO modelToDto(Student model) {
-    return new StudentResponseDTO(
-        model.getUuid(),
-        model.getName(),
-        model.getEmail(),
-        model.isActive(),
-        model.getClassId()
-    );
-  }
 }
-

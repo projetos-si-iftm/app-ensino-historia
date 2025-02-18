@@ -1,4 +1,4 @@
-package com.nataliaarantes.iftm.model.dto.classroom;
+package com.iftm.dto.authDTO.dto.classroom;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

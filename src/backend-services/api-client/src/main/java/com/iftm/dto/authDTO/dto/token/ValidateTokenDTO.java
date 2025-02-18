@@ -1,4 +1,4 @@
-package com.nataliaarantes.iftm.model.dto.token;
+package com.iftm.dto.authDTO.dto.token;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

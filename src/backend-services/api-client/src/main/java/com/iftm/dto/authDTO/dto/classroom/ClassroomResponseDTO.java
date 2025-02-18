@@ -1,7 +1,6 @@
-package com.nataliaarantes.iftm.model.dto.classroom;
+package com.iftm.dto.authDTO.dto.classroom;
 
-import com.nataliaarantes.iftm.model.Classroom;
-import com.nataliaarantes.iftm.model.dto.user.Student.StudentResponseDTO;
+import com.iftm.dto.authDTO.dto.user.Student.StudentResponseDTO;
 import lombok.*;
 
 import java.util.List;
@@ -18,13 +17,4 @@ public class ClassroomResponseDTO {
   private boolean isActive;
   private List<StudentResponseDTO> students;
 
-
-  public static ClassroomResponseDTO modelToResponseDto(Classroom model) {
-    return ClassroomResponseDTO.builder()
-        .uuid(model.getUuid())
-        .name(model.getName())
-        .year(model.getYear())
-        .isActive(model.isActive())
-        .build();
-  }
 }

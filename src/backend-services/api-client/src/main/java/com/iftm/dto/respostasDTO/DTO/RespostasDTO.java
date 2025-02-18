@@ -1,4 +1,4 @@
-package com.ifmt.dto.respostasDTO.DTO;
+package com.iftm.dto.respostasDTO.DTO;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
