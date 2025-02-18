@@ -1,4 +1,4 @@
-package iftm.edu.br.questoes_api.models.Dto;
+package com.iftm.dto.questoesDTO.Dto;
 
 import java.time.LocalDateTime;
 import java.util.List;
