@@ -18,8 +18,8 @@ public class ClassroomController {
   private ClassroomService classroomService;
 
   @PostMapping
-  public ResponseEntity<ClassroomResponseDTO> create(@RequestBody ClassroomDTO requestBody) {
-    var response = classroomService.create(requestBody);
+  public ResponseEntity<ClassroomResponseDTO> create(@RequestBody ClassroomDTO requestBody, @RequestHeader("Authorization") String token) {
+    var response = classroomService.create(requestBody, token);
     return new ResponseEntity<ClassroomResponseDTO>(response, HttpStatusCode.valueOf(201));
   }
 
@@ -38,15 +38,16 @@ public class ClassroomController {
   @PutMapping("/{id}")
   public ResponseEntity<ClassroomResponseDTO> update(
       @PathVariable String id,
-      @RequestBody ClassroomDTO dto
+      @RequestBody ClassroomDTO dto,
+      @RequestHeader("Authorization") String token
   ) {
-    var response = classroomService.update(id, dto);
+    var response = classroomService.update(id, dto, token);
     return new ResponseEntity<ClassroomResponseDTO>(response, HttpStatusCode.valueOf(200));
   }
 
   @DeleteMapping("/{id}")
-  public ResponseEntity<Void> delete(@PathVariable String id) {
-    classroomService.delete(id);
+  public ResponseEntity<Void> delete(@PathVariable String id, @RequestHeader("Authorization") String token) {
+    classroomService.delete(id, token);
     return new ResponseEntity<Void>(HttpStatusCode.valueOf(204));
   }
 }

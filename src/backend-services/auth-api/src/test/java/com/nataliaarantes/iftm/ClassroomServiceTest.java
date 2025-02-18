@@ -11,6 +11,7 @@ import com.nataliaarantes.iftm.model.dto.classroom.ClassroomResponseDTO;
 import com.nataliaarantes.iftm.repository.ClassroomRepository;
 import com.nataliaarantes.iftm.repository.UserRepository;
 import com.nataliaarantes.iftm.service.ClassroomService;
+import com.nataliaarantes.iftm.service.TokenService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -32,6 +33,9 @@ class ClassroomServiceTest {
   @Mock
   private UserRepository userRepository;
 
+  @Mock
+  private TokenService tokenService;
+
   @InjectMocks
   private ClassroomService classroomService;
 
@@ -39,6 +43,8 @@ class ClassroomServiceTest {
   private Classroom classroom;
   private Teacher teacher;
   private Student student;
+
+  private final String token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJhdXRoLWFwaSIsInN1YiI6InByb2ZAaWZ0bS5jb20iLCJ1dWlkIjoiNjdiMzQyOGUzNjQ0ZDk3ODFkMjZhZGQxIiwidHlwZSI6InRlYWNoZXIiLCJjbGFzc0lkIjoiIiwiZXhwIjoxNzcxMzQ0MDc0fQ.Qe6vO0DnNXnVtj3uwe-spLXKG0nmIcIChikAOTyTZwA";
 
   @BeforeEach
   void setUp() {
@@ -53,8 +59,10 @@ class ClassroomServiceTest {
   void testCreateClassroomAsTeacher() {
     when(classroomRepository.findByName(classroomDTO.getName())).thenReturn(Optional.empty());
     when(classroomRepository.save(any(Classroom.class))).thenReturn(classroom);
+    when(tokenService.validateToken(token)).thenReturn(teacher.getEmail());
+    when(userRepository.findByEmail(teacher.getEmail())).thenReturn(Optional.ofNullable(teacher));
 
-    ClassroomResponseDTO response = classroomService.create(classroomDTO);
+    ClassroomResponseDTO response = classroomService.create(classroomDTO, token);
 
     assertNotNull(response);
     assertEquals("Math", response.getName());
@@ -65,7 +73,7 @@ class ClassroomServiceTest {
   void testCreateClassroomAlreadyExists() {
     when(classroomRepository.findByName(classroomDTO.getName())).thenReturn(Optional.of(classroom));
 
-    Exception exception = assertThrows(HttpClientErrorException.class, () -> classroomService.create(classroomDTO));
+    Exception exception = assertThrows(HttpClientErrorException.class, () -> classroomService.create(classroomDTO, token));
     assertTrue(exception.getMessage().contains("Classroom already exists"));
   }
 
@@ -106,8 +114,10 @@ class ClassroomServiceTest {
   void testUpdateClassroomAsTeacher() {
     when(classroomRepository.findByUuid("1")).thenReturn(Optional.of(classroom));
     when(classroomRepository.save(any(Classroom.class))).thenReturn(classroom);
+    when(tokenService.validateToken(token)).thenReturn(teacher.getEmail());
+    when(userRepository.findByEmail(teacher.getEmail())).thenReturn(Optional.ofNullable(teacher));
 
-    ClassroomResponseDTO response = classroomService.update("1", classroomDTO);
+    ClassroomResponseDTO response = classroomService.update("1", classroomDTO, token);
 
     assertNotNull(response);
     assertEquals("Math", response.getName());
@@ -118,7 +128,7 @@ class ClassroomServiceTest {
   void testUpdateClassroomNotFound() {
     when(classroomRepository.findByUuid("1")).thenReturn(Optional.empty());
 
-    Exception exception = assertThrows(HttpClientErrorException.class, () -> classroomService.update("1", classroomDTO));
+    Exception exception = assertThrows(HttpClientErrorException.class, () -> classroomService.update("1", classroomDTO, token));
     assertTrue(exception.getMessage().contains("Class not found"));
   }
 
@@ -127,8 +137,10 @@ class ClassroomServiceTest {
   void testDeleteClassroomAsTeacher() {
     when(classroomRepository.findByUuid("1")).thenReturn(Optional.of(classroom));
     doNothing().when(classroomRepository).delete(any(Classroom.class));
+    when(tokenService.validateToken(token)).thenReturn(teacher.getEmail());
+    when(userRepository.findByEmail(teacher.getEmail())).thenReturn(Optional.ofNullable(teacher));
 
-    assertDoesNotThrow(() -> classroomService.delete("1"));
+    assertDoesNotThrow(() -> classroomService.delete("1", token));
   }
 
   @Test
@@ -136,7 +148,7 @@ class ClassroomServiceTest {
   void testDeleteClassroomNotFound() {
     when(classroomRepository.findByUuid("1")).thenReturn(Optional.empty());
 
-    Exception exception = assertThrows(HttpClientErrorException.class, () -> classroomService.delete("1"));
+    Exception exception = assertThrows(HttpClientErrorException.class, () -> classroomService.delete("1", token));
     assertTrue(exception.getMessage().contains("Class not found"));
   }
 }
