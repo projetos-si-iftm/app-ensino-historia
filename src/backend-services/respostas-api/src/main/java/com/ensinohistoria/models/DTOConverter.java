@@ -1,26 +1,9 @@
-package com.iftm.dto.respostasDTO.converter;
+package com.ensinohistoria.models;
 
 import com.iftm.dto.respostasDTO.DTO.EstatisticasDTO;
 import com.iftm.dto.respostasDTO.DTO.RespostasDTO;
 
-
 public class DTOConverter {
-
-    public static EstatisticasDTO toEstatisticasDTO(Estatisticas estatisticas) {
-        return new EstatisticasDTO(
-            estatisticas.getTotalRespostas(),
-            estatisticas.getRespostasCorretas(),
-            estatisticas.getRespostasIncorretas()
-        );
-    }
-
-    public static Estatisticas toEstatisticas(EstatisticasDTO dto) {
-        Estatisticas estatisticas = new Estatisticas();
-        estatisticas.setTotalRespostas(dto.getTotalRespostas());
-        estatisticas.setRespostasCorretas(dto.getRespostasCorretas());
-        estatisticas.setRespostasIncorretas(dto.getRespostasIncorretas());
-        return estatisticas;
-    }
 
     public static RespostasDTO toRespostasDTO(Respostas resposta) {
         return RespostasDTO.builder()
