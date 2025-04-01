@@ -3,14 +3,16 @@
 # 📌 Sobre o Projeto
 
 <p>O HistoLinguo é um aplicativo educacional gamificado, desenvolvido para alunos do ensino médio testarem seus conhecimentos em História através de quizzes interativos.</p>
-<br>
 <p>Os alunos podem escolher diferentes temas, separados por dificuldade, responder perguntas e competir no ranking. Além disso, um painel web exclusivo para professores permite a gestão de turmas, temas e questões.</p>
+<br>
 
-# 🚀 Tecnologias Utilizadas
+# 🚀 Tecnologias Utilizadas ──┐
 
 # 🖥️ Frontend
 <p>🔹 Mobile: React Native (JavaScript)</p>
 <p>🔹 Web (Admin): React.js (JavaScript)</p>
+
+<br>
 
 # ⚙️ Backend
 <p>🔹 Linguagem: Java + Spring Boot</p>
@@ -18,14 +20,16 @@
 <p>🔹 Autenticação: Firebase Authentication (Google)</p>
 <p>🔹 Arquitetura: Microserviços</p>
 
+<br>
+
 # 🔗 Infraestrutura
 <p>🔹 Service Discovery: Eureka</p>
 <p>🔹 API Gateway: Spring Cloud Gateway</p>
 <p>🔹 Circuit Breaker: Resilience4j</p>
 
+<br>
 
-# 📂 Estrutura do Projeto
-
+# 📂 Estrutura do Projeto ──┐
 # 📱 Aplicativo Mobile
 <p>✅ Tela de Login (Google Authentication)</p>
 <p>✅ Tela Inicial (Escolher tema, ranking, perfil)</p>
@@ -33,11 +37,15 @@
 <p>✅ Tela de Quiz (Questões interativas)</p>
 <p>✅ Tela de Ranking (Classificação dos alunos)</p>
 
+<br>
+
 # 💻 Aplicação Web (Professores/Admin)
 <p>✅ Login do Professor</p>
 <p>✅ Cadastro e Gerenciamento de Turmas</p>
 <p>✅ Gerenciamento de Temas e Questões</p>
 <p>✅ Visualização do Ranking dos Alunos</p>
+
+<br>
 
 # 🛠️ Backend - Microserviços
 <p>✅ Temas: CRUD de temas do quiz</p>
@@ -48,13 +56,16 @@
 <p>✅ API Gateway: Encaminhamento de requisições</p>
 <p>✅ Service Discovery: Registro dinâmico dos serviços</p>
 
+<br>
 
-# 🎮 Como Rodar o Projeto?
+# 🎮 Como Rodar o Projeto? ──┐
 
 # 🔧 Configuração do Backend
 
 <p>Clone o repositório</p>
 <p>Em breve ... </p>
+
+<br>
 
 # 📱 Configuração do Mobile (React Native)
 <p>Instale as dependências</p>
@@ -63,6 +74,8 @@
 <br>
 <p>Execute o projeto no emulador</p>
 <p>npm run android</p>
+
+<br>
 
 # 💻 Configuração do Web (React.js)
 <p>Instale as dependências</p>
