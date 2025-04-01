@@ -1,72 +1,73 @@
-📚 HistoLinguo - Aprenda História de Forma Divertida!
+#📚 HistoLinguo - Aprenda História de Forma Divertida!
 
-📌 Sobre o Projeto
+#📌 Sobre o Projeto
 
-O HistoLinguo é um aplicativo educacional gamificado, desenvolvido para alunos do ensino médio testarem seus conhecimentos em História através de quizzes interativos.
+<p>O HistoLinguo é um aplicativo educacional gamificado, desenvolvido para alunos do ensino médio testarem seus conhecimentos em História através de quizzes interativos.</p>
+<br>
+<p>Os alunos podem escolher diferentes temas, separados por dificuldade, responder perguntas e competir no ranking. Além disso, um painel web exclusivo para professores permite a gestão de turmas, temas e questões.</p>
 
-Os alunos podem escolher diferentes temas, separados por dificuldade, responder perguntas e competir no ranking. Além disso, um painel web exclusivo para professores permite a gestão de turmas, temas e questões.
-🚀 Tecnologias Utilizadas
+#🚀 Tecnologias Utilizadas
 
-🖥️ Frontend
-🔹 Mobile: React Native (JavaScript)
-🔹 Web (Admin): React.js (JavaScript)
+#🖥️ Frontend
+<p>🔹 Mobile: React Native (JavaScript)</p>
+<p>🔹 Web (Admin): React.js (JavaScript)</p>
 
-⚙️ Backend
-🔹 Linguagem: Java + Spring Boot
-🔹 Banco de Dados: MongoDB
-🔹 Autenticação: Firebase Authentication (Google)
-🔹 Arquitetura: Microserviços
+#⚙️ Backend
+<p>🔹 Linguagem: Java + Spring Boot</p>
+<p>🔹 Banco de Dados: MongoDB</p>
+<p>🔹 Autenticação: Firebase Authentication (Google)</p>
+<p>🔹 Arquitetura: Microserviços</p>
 
-🔗 Infraestrutura
-🔹 Service Discovery: Eureka
-🔹 API Gateway: Spring Cloud Gateway
-🔹 Circuit Breaker: Resilience4j
-
-
-📂 Estrutura do Projeto
-
-📱 Aplicativo Mobile
-✅ Tela de Login (Google Authentication)
-✅ Tela Inicial (Escolher tema, ranking, perfil)
-✅ Tela de Temas (Listagem por dificuldade)
-✅ Tela de Quiz (Questões interativas)
-✅ Tela de Ranking (Classificação dos alunos)
-
-💻 Aplicação Web (Professores/Admin)
-✅ Login do Professor
-✅ Cadastro e Gerenciamento de Turmas
-✅ Gerenciamento de Temas e Questões
-✅ Visualização do Ranking dos Alunos
-
-🛠️ Backend - Microserviços
-✅ Temas: CRUD de temas do quiz
-✅ Questões: CRUD de perguntas
-✅ Respostas: Processamento de respostas e pontuação
-✅ Ranking: Classificação dos alunos
-✅ Autenticação: Gerenciamento de professores
-✅ API Gateway: Encaminhamento de requisições
-✅ Service Discovery: Registro dinâmico dos serviços
+#🔗 Infraestrutura
+<p>🔹 Service Discovery: Eureka</p>
+<p>🔹 API Gateway: Spring Cloud Gateway</p>
+<p>🔹 Circuit Breaker: Resilience4j</p>
 
 
-🎮 Como Rodar o Projeto?
+#📂 Estrutura do Projeto
 
-🔧 Configuração do Backend
+#📱 Aplicativo Mobile
+<p>✅ Tela de Login (Google Authentication)</p>
+<p>✅ Tela Inicial (Escolher tema, ranking, perfil)</p>
+<p>✅ Tela de Temas (Listagem por dificuldade)</p>
+<p>✅ Tela de Quiz (Questões interativas)</p>
+<p>✅ Tela de Ranking (Classificação dos alunos)</p>
 
-# Clone o repositório
-Em breve ... 
+#💻 Aplicação Web (Professores/Admin)
+<p>✅ Login do Professor</p>
+<p>✅ Cadastro e Gerenciamento de Turmas</p>
+<p>✅ Gerenciamento de Temas e Questões</p>
+<p>✅ Visualização do Ranking dos Alunos</p>
 
-📱 Configuração do Mobile (React Native)
-# Instale as dependências
-cd histolinguo/mobile
-npm install
+#🛠️ Backend - Microserviços
+<p>✅ Temas: CRUD de temas do quiz</p>
+<p>✅ Questões: CRUD de perguntas</p>
+<p>✅ Respostas: Processamento de respostas e pontuação</p>
+<p>✅ Ranking: Classificação dos alunos</p>
+<p>✅ Autenticação: Gerenciamento de professores</p>
+<p>✅ API Gateway: Encaminhamento de requisições</p>
+<p>✅ Service Discovery: Registro dinâmico dos serviços</p>
 
-# Execute o projeto no emulador
-npm run android
 
-💻 Configuração do Web (React.js)
-# Instale as dependências
-cd histolinguo/web
-npm install
+#🎮 Como Rodar o Projeto?
 
-# Execute a aplicação
-npm start
+#🔧 Configuração do Backend
+
+<p>Clone o repositório</p>
+<p>Em breve ... </p>
+
+#📱 Configuração do Mobile (React Native)
+<p>Instale as dependências</p>
+<p>cd histolinguo/mobile</p>
+<p>npm install</p>
+<br>
+<p>Execute o projeto no emulador</p>
+<p>npm run android</p>
+
+#💻 Configuração do Web (React.js)
+<p>Instale as dependências</p>
+<p>cd histolinguo/web</p>
+<p>npm install</p>
+<br>
+<p>Execute a aplicação</p>
+<p>npm start</p>
