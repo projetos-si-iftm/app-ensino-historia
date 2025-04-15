@@ -1,4 +1,4 @@
-package com.ensinohistoria.models.DTO;
+package com.iftm.dto.respostasDTO.DTO;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

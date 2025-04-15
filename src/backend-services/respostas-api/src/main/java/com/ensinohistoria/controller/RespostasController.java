@@ -1,15 +1,24 @@
 package com.ensinohistoria.controller;
 
-import com.ensinohistoria.models.DTO.RespostasDTO;
-import com.ensinohistoria.exceptions.ResourceNotFoundException;
-import com.ensinohistoria.models.DTO.EstatisticasDTO;
-import com.ensinohistoria.services.RespostasService;
-import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.UUID;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.ensinohistoria.exceptions.ResourceNotFoundException;
+import com.ensinohistoria.services.RespostasService;
+import com.iftm.dto.respostasDTO.DTO.EstatisticasDTO;
+import com.iftm.dto.respostasDTO.DTO.RespostasDTO;
+
+import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("/api/respostas")
@@ -42,16 +51,15 @@ public class RespostasController {
         return ResponseEntity.ok(resposta);
     }
 
-    // DESCOMENTAR QUANDO REALIZAR A INTEGRAÇÃO COM QUESTOES
-    // @GetMapping("/estatisticas/{questaoId}")
-    // public ResponseEntity<?> getEstatisticas(@PathVariable UUID questaoId) {
-    // try {
-    // EstatisticasDTO estatisticas = respostasService.getEstatisticas(questaoId);
-    // return ResponseEntity.ok(estatisticas);
-    // } catch (ResourceNotFoundException ex) {
-    // return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
-    // }
-    // }
+    @GetMapping("/estatisticas/{questaoId}")
+    public ResponseEntity<?> getEstatisticas(@PathVariable UUID questaoId) {
+        try {
+            EstatisticasDTO estatisticas = respostasService.getEstatisticas(questaoId);
+            return ResponseEntity.ok(estatisticas);
+        } catch (ResourceNotFoundException ex) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
+        }
+    }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> desativarResposta(@PathVariable String id) {

@@ -1,23 +1,27 @@
 package com.ensinohistoria.services;
 
-import com.ensinohistoria.exceptions.ResourceNotFoundException;
-import com.ensinohistoria.exceptions.BadRequestException;
-import com.ensinohistoria.models.Respostas;
-import com.ensinohistoria.models.DTO.RespostasDTO;
-import com.ensinohistoria.models.DTO.EstatisticasDTO;
-import com.ensinohistoria.repositories.RespostasRepository;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
+
+import com.ensinohistoria.exceptions.BadRequestException;
+import com.ensinohistoria.exceptions.ResourceNotFoundException;
+import com.ensinohistoria.models.Respostas;
+import com.ensinohistoria.repositories.RespostasRepository;
+import com.iftm.dto.respostasDTO.DTO.EstatisticasDTO;
+import com.iftm.dto.respostasDTO.DTO.RespostasDTO;
+
+import lombok.RequiredArgsConstructor;
+
 @Service
 @RequiredArgsConstructor
 public class RespostasService {
-
     private final RespostasRepository respostasRepository;
+    private final RestTemplate restTemplate = new RestTemplate();
 
     // Registra uma nova resposta
     public RespostasDTO registrarResposta(RespostasDTO respostaDTO) {
@@ -69,32 +73,27 @@ public class RespostasService {
         respostasRepository.save(resposta);
     }
 
-    // DESCOMENTAR QUANDO REALIZAR A INTEGRAÇÃO COM QUESTOES
-    // public EstatisticasDTO getEstatisticas(UUID questaoId) {
-    // List<Respostas> respostas = respostasRepository.findByQuestaoId(questaoId);
+    public EstatisticasDTO getEstatisticas(UUID questaoId) {
+        List<Respostas> respostas = respostasRepository.findByQuestaoId(questaoId);
 
-    // if (respostas.isEmpty()) {
-    // throw new ResourceNotFoundException("Nenhuma resposta encontrada para esta
-    // questão");
-    // }
+        if (respostas.isEmpty()) {
+            throw new ResourceNotFoundException("Nenhuma resposta encontrada para estaquestão");
+        }
 
-    // UUID alternativaCorreta = buscarAlternativaCorreta(questaoId);
+        UUID alternativaCorreta = buscarAlternativaCorreta(questaoId);
 
-    // long total = respostas.size();
-    // long corretas = respostas.stream()
-    // .filter(r -> r.getAlternativaId().equals(alternativaCorreta))
-    // .count();
+        long total = respostas.size();
+        long corretas = respostas.stream()
+                .filter(r -> r.getAlternativaId().equals(alternativaCorreta))
+                .count();
 
-    // return new EstatisticasDTO(total, corretas, total - corretas);
-    // }
+        return new EstatisticasDTO(total, corretas, total - corretas);
+    }
 
-    // DESCOMENTAR QUANDO REALIZAR A INTEGRAÇÃO COM QUESTOES
-    // private UUID buscarAlternativaCorreta(UUID questaoId) {
-    //
-    // String url = "http://localhost:8081/api/questoes/" + questaoId +
-    // "/alternativa-correta";
-    // return restTemplate.getForObject(url, UUID.class);
-    // }
+    private UUID buscarAlternativaCorreta(UUID questaoId) {
+        String url = "http://localhost:8081/api/questoes/" + questaoId + "/alternativa-correta";
+        return restTemplate.getForObject(url, UUID.class);
+    }
 
     // Validação dos campos obrigatórios
     private void validarCamposObrigatorios(RespostasDTO dto) {
