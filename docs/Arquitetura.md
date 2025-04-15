@@ -164,11 +164,11 @@ Se você está seguindo a arquitetura baseada no diagrama com microserviços, re
 
 | **App no Heroku**        | **PROJECT_PATH**                         | **Descrição**                                  |
 |--------------------------|-------------------------------------------|------------------------------------------------|
-| `auth-api`               | `src/backend-services/auth-api`           | Serviço de autenticação e geração de JWT       |
-| `gateway-api`            | `src/backend-services/gateway-api`        | API Gateway com Spring Cloud e Redis           |
-| `questoes-api`           | `src/backend-services/questoes-api`       | CRUD de questões com MongoDB                   |
-| `respostas-api`          | `src/backend-services/respostas-api`      | Armazenamento de respostas e estatísticas      |
-| `api-client` *(opcional)*| `src/backend-services/api-client`         |  (se houver)|
+| `fidiquem-auth-api`               | `src/backend-services/auth-api`           | Serviço de autenticação e geração de JWT       |
+| `fidiquem-gateway-api`            | `src/backend-services/gateway-api`        | API Gateway com Spring Cloud e Redis           |
+| `fidiquem-questoes-api`           | `src/backend-services/questoes-api`       | CRUD de questões com MongoDB                   |
+| `fidiquem-respostas-api`          | `src/backend-services/respostas-api`      | Armazenamento de respostas e estatísticas      |
+| `fidiquem-api-client` *(opcional)*| `src/backend-services/api-client`         |  (se houver)|
 
 Vamos utilizar um **monorepo com subpastas** dentro de `src/backend-services`.
 

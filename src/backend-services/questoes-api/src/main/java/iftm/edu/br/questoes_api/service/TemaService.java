@@ -45,12 +45,12 @@ public class TemaService {
         }
         Tema existingTema = temaRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Tema não encontrado com ID: " + id));
-        
+
         existingTema.setNome(Tema.getNome());
         existingTema.setDescricao(Tema.getDescricao());
         existingTema.setVisivel(Tema.isVisivel());
         existingTema.setDataAtualizacao(LocalDateTime.now());
-        
+
         Tema updatedTema = temaRepository.save(existingTema);
         return toDTO(updatedTema);
     }
@@ -62,7 +62,6 @@ public class TemaService {
         temaRepository.deleteById(id);
     }
 
-
     private Tema toDTO(Tema tema) {
         return new Tema(
                 tema.getId(),
@@ -71,19 +70,19 @@ public class TemaService {
                 tema.isVisivel(),
                 tema.getDataCriacao(),
                 tema.getDataAtualizacao(),
-                tema.isAtivo()
-        );
-    }
-
-    private Tema toEntity(Tema dto) {
-        return new Tema(
-                dto.getId(),
-                dto.getNome(),
-                dto.getDescricao(),
-                dto.isVisivel(),
-                dto.getDataCriacao(),
-                dto.getDataAtualizacao(),
-                dto.isAtivo()
-        );
+                tema.isAtivo(),
+                tema.getImagem());
+            }
+            
+            private Tema toEntity(Tema dto) {
+                return new Tema(
+                    dto.getId(),
+                    dto.getNome(),
+                    dto.getDescricao(),
+                    dto.isVisivel(),
+                    dto.getDataCriacao(),
+                    dto.getDataAtualizacao(),
+                    dto.isAtivo(),
+                    dto.getImagem());
     }
 }

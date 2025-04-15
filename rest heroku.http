@@ -1,12 +1,12 @@
 ###
-# Questões
-GET http://localhost:8081/api/v1/questoes
+# Questões ------------------------------------------------------------------------------------------------------------------------
+GET https://fidiquem-questoes-api-043ed1794ea9.herokuapp.com/api/v1/questoes
 
 ###
-GET http://localhost:8081/api/v1/questoes/67a29d02c052ab7ad7b31fe1
+GET https://fidiquem-questoes-api-043ed1794ea9.herokuapp.com/api/v1/questoes/67a29d02c052ab7ad7b31fe1
 
 ###
-POST http://localhost:8081/api/v1/questoes
+POST https:/fidiquem-questoes-api-043ed1794ea9.herokuapp.com/api/v1/questoes
 Content-Type: application/json
 
 {
@@ -22,42 +22,43 @@ Content-Type: application/json
 }
 
 ###
-GET http://localhost:8081/api/v1/questoes/tema/{{temaId}}
+GET https://fidiquem-questoes-api-043ed1794ea9.herokuapp.com/api/v1/questoes/tema/{{temaId}}
 
 ###
-GET http://localhost:8081/api/v1/questoes/dificuldade/{{nivel}}
+GET https://fidiquem-questoes-api-043ed1794ea9.herokuapp.com/api/v1/questoes/dificuldade/{{nivel}}
 
 ###
-DELETE http://localhost:8081/api/v1/questoes/{{id}}
+DELETE https://fidiquem-questoes-api-043ed1794ea9.herokuapp.com/api/v1/questoes/{{id}}
 
 ###
-# Temas
-GET http://localhost:8081/api/v1/temas
+# Temas ------------------------------------------------------------------------------------------------------------------------
+GET https://fidiquem-questoes-api-043ed1794ea9.herokuapp.com/api/v1/temas
 
 ###
-GET http://localhost:8081/api/v1/temas/{{id}}
+GET https://fidiquem-questoes-api-043ed1794ea9.herokuapp.com/api/v1/temas/{{id}}
 
 ###
-POST http://localhost:8081/api/v1/temas
+POST https://fidiquem-questoes-api-043ed1794ea9.herokuapp.com/api/v1/temas
 Content-Type: application/json
 
 {
-  "nome": "Exemplo de Tema",
-  "descricao": "Descrição do tema"
+    "nome": "História do Brasil colônia",
+    "descricao": "Questões relacionadas ao estudo do Brasil colônia.",
+    "imagem":"https://static.todamateria.com.br/upload/56/d3/56d34472f00e8-brasil-colonia.jpg"
 }
 
 ###
-DELETE http://localhost:8081/api/v1/temas/{{id}}
+DELETE https://fidiquem-questoes-api-043ed1794ea9.herokuapp.com/api/v1/temas/{{id}}
 
 ###
-# Alternativas
-GET http://localhost:8081/api/v1/alternativas
+# Alternativas ------------------------------------------------------------------------------------------------------------------------
+GET https://fidiquem-questoes-api-043ed1794ea9.herokuapp.com/api/v1/alternativas
 
 ###
-GET http://localhost:8081/api/v1/alternativas/{{id}}
+GET https://fidiquem-questoes-api-043ed1794ea9.herokuapp.com/api/v1/alternativas/{{id}}
 
 ###
-POST http://localhost:8081/api/v1/alternativas
+POST https://fidiquem-questoes-api-043ed1794ea9.herokuapp.com/api/v1/alternativas
 Content-Type: application/json
 
 {
@@ -66,7 +67,7 @@ Content-Type: application/json
 }
 
 ###
-PUT http://localhost:8081/api/v1/alternativas/{{id}}
+PUT https://fidiquem-questoes-api-043ed1794ea9.herokuapp.com/api/v1/alternativas/{{id}}
 Content-Type: application/json
 
 {
@@ -75,6 +76,6 @@ Content-Type: application/json
 }
 
 ###
-DELETE http://localhost:8081/api/v1/alternativas/{{id}}
+DELETE https://fidiquem-questoes-api-043ed1794ea9.herokuapp.com/api/v1/alternativas/{{id}}
 
 

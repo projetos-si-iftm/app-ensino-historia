@@ -20,4 +20,6 @@ public class Tema {
     private LocalDateTime dataCriacao;
     private LocalDateTime dataAtualizacao;
     private boolean ativo;
+
+    private String imagem; //URL da imagem do tema
 }
