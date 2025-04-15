@@ -5,7 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import lombok.RequiredArgsConstructor;
-import iftm.edu.br.questoes_api.models.Dto.AlternativaDTO;
+import iftm.edu.br.questoes_api.models.Alternativa;
 import iftm.edu.br.questoes_api.service.AlternativaService;
 
 @RestController
@@ -15,15 +15,15 @@ public class AlternativaController {
     private final AlternativaService alternativaService;
 
     @GetMapping
-    public List<AlternativaDTO> getAllAlternativas() {
+    public List<Alternativa> getAllAlternativas() {
         return alternativaService.getAllAlternativas();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<AlternativaDTO> getAlternativaById(@PathVariable String id) {
-        AlternativaDTO alternativaDTO = alternativaService.getAlternativaById(id);
-        if (alternativaDTO != null) {
-            return ResponseEntity.ok(alternativaDTO);
+    public ResponseEntity<Alternativa> getAlternativaById(@PathVariable String id) {
+        Alternativa alternativa = alternativaService.getAlternativaById(id);
+        if (alternativa != null) {
+            return ResponseEntity.ok(alternativa);
         } else {
             return ResponseEntity.notFound().build();
         }
@@ -31,8 +31,8 @@ public class AlternativaController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public AlternativaDTO saveAlternativa(@RequestBody AlternativaDTO alternativaDTO) {
-        return alternativaService.saveAlternativa(alternativaDTO);
+    public Alternativa saveAlternativa(@RequestBody Alternativa alternativa) {
+        return alternativaService.saveAlternativa(alternativa);
     }
 
     @DeleteMapping("/{id}")
@@ -46,13 +46,13 @@ public class AlternativaController {
     }
 
     @PutMapping("/{id}")
-public ResponseEntity<AlternativaDTO> updateAlternativa(@PathVariable String id, 
-                                                       @RequestBody AlternativaDTO alternativaDTO) {
-    AlternativaDTO updatedAlternativa = alternativaService.updateAlternativa(id, alternativaDTO);
-    if (updatedAlternativa != null) {
-        return ResponseEntity.ok(updatedAlternativa);
-    } else {
-        return ResponseEntity.notFound().build();
+    public ResponseEntity<Alternativa> updateAlternativa(@PathVariable String id,
+            @RequestBody Alternativa alternativa) {
+        Alternativa updatedAlternativa = alternativaService.updateAlternativa(id, alternativa);
+        if (updatedAlternativa != null) {
+            return ResponseEntity.ok(updatedAlternativa);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
-}
 }

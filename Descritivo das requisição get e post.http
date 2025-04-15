@@ -5,7 +5,7 @@ post
   "nome": "Astronomia",
   "descricao": "Questões relacionadas ao estudo do universo."
 }
--------------------------------------------------------------------
+###
 http://localhost:8080/temas
 get temas
 resultado criado
@@ -22,7 +22,7 @@ resultado criado
     }
 ]
 
---------------------------------------------------------------------
+###-
 http://localhost:8080/alternativas
 post da requisição de criação
 {
@@ -44,9 +44,8 @@ post da requisição de criação
   "texto": "Saturno",
   "isCorreto": false
 }
-----------------------------------------------------------
-http://localhost:8080/alternativas
-Get do resultado para trazer as alternativas criadas 
+###-----
+GET http://localhost:8080/alternativas
 
 [
     {
@@ -83,7 +82,7 @@ Get do resultado para trazer as alternativas criadas
     }
 ]
 
------------------------------------------------------------------------------------
+###----------------
 http://localhost:8080/questoes
 post questao  - para criação de questão
    
@@ -103,9 +102,8 @@ post questao  - para criação de questão
 }
 
 
------------------------------------------------------------------------------------------------
-http://localhost:8080/questoes
-get questao - comando para trazer as questões criadas 
+###----------------------------
+GET http://localhost:8081/questoes HTTP/1.1
 
 [
     {

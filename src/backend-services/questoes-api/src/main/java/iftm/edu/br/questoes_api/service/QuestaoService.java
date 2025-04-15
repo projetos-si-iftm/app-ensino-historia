@@ -12,8 +12,6 @@ import iftm.edu.br.questoes_api.models.Questao;
 import iftm.edu.br.questoes_api.exceptions.ResourceNotFoundException;
 import iftm.edu.br.questoes_api.exceptions.BadRequestException;
 import iftm.edu.br.questoes_api.models.Alternativa;
-import iftm.edu.br.questoes_api.models.Dto.QuestaoDTO;
-import iftm.edu.br.questoes_api.models.Dto.AlternativaDTO;
 import iftm.edu.br.questoes_api.repositories.QuestaoRepository;
 import iftm.edu.br.questoes_api.repositories.AlternativaRepository;
 
@@ -23,35 +21,35 @@ public class QuestaoService {
     private final QuestaoRepository questaoRepository;
     private final AlternativaRepository alternativaRepository;
 
-    public List<QuestaoDTO> getAllQuestoes() {
+    public List<Questao> getAllQuestoes() {
         return questaoRepository.findAll().stream()
                 .map(this::toDTO)
                 .collect(Collectors.toList());
     }
 
-    public QuestaoDTO getQuestaoById(String id) {
+    public Questao getQuestaoById(String id) {
         return questaoRepository.findById(id)
             .map(this::toDTO)
             .orElseThrow(() -> new ResourceNotFoundException("Questão não encontrada com ID: " + id));
     }
 
-    public QuestaoDTO saveQuestao(QuestaoDTO questaoDTO) {
-        if (questaoDTO.getTitulo() == null || questaoDTO.getTitulo().trim().isEmpty()) {
+    public Questao saveQuestao(Questao Questao) {
+        if (Questao.getTitulo() == null || Questao.getTitulo().trim().isEmpty()) {
             throw new BadRequestException("O título da questão não pode estar vazio");
         }
-        if (questaoDTO.getAlternativas() == null || questaoDTO.getAlternativas().isEmpty()) {
+        if (Questao.getAlternativas() == null || Questao.getAlternativas().isEmpty()) {
             throw new BadRequestException("A questão deve ter pelo menos uma alternativa");
         }
 
-        Questao questao = toEntity(questaoDTO);
+        Questao questao = toEntity(Questao);
         questao.setDataCriacao(LocalDateTime.now());
         questao.setDataAtualizacao(LocalDateTime.now());
 
         List<Alternativa> alternativas = new ArrayList<>();
-        for (AlternativaDTO alternativaDTO : questaoDTO.getAlternativas()) {
+        for (Alternativa Alternativa : Questao.getAlternativas()) {
             Alternativa alternativa = new Alternativa();
-            alternativa.setTexto(alternativaDTO.getTexto());
-            alternativa.setCorreto(alternativaDTO.isCorreto());
+            alternativa.setTexto(Alternativa.getTexto());
+            alternativa.setCorreto(Alternativa.isCorreto());
             alternativa.setDataCriacao(LocalDateTime.now());
             alternativa.setDataAtualizacao(LocalDateTime.now());
             alternativa = alternativaRepository.save(alternativa);
@@ -77,19 +75,19 @@ public class QuestaoService {
         questaoRepository.deleteById(id);
     }
 
-    public List<QuestaoDTO> getQuestoesByDificuldade(int nivel) {
+    public List<Questao> getQuestoesByDificuldade(int nivel) {
         List<Questao> questoes = questaoRepository.findByDificuldade(nivel);
         return questoes.stream()
                 .map(this::toDTO)
                 .collect(Collectors.toList());
     }
 
-    private QuestaoDTO toDTO(Questao questao) {
-        List<AlternativaDTO> alternativasDTO = questao.getAlternativas().stream()
-                .map(alternativa -> new AlternativaDTO(alternativa.getId(), alternativa.getTexto(), alternativa.isCorreto(), alternativa.getDataCriacao(), alternativa.getDataAtualizacao(), alternativa.isAtivo()))
+    private Questao toDTO(Questao questao) {
+        List<Alternativa> alternativasDTO = questao.getAlternativas().stream()
+                .map(alternativa -> new Alternativa(alternativa.getId(), alternativa.getTexto(), alternativa.isCorreto(), alternativa.getDataCriacao(), alternativa.getDataAtualizacao(), alternativa.isAtivo()))
                 .collect(Collectors.toList());
 
-        return new QuestaoDTO(
+        return new Questao(
                 questao.getId(),
                 questao.getTitulo(),
                 questao.getEnunciado(),
@@ -103,7 +101,7 @@ public class QuestaoService {
         );
     }
 
-    private Questao toEntity(QuestaoDTO dto) {
+    private Questao toEntity(Questao dto) {
         Questao questao = new Questao();
         questao.setId(dto.getId());
         questao.setTitulo(dto.getTitulo());
@@ -116,10 +114,10 @@ public class QuestaoService {
         questao.setAtivo(dto.isAtivo());
 
         List<Alternativa> alternativas = new ArrayList<>();
-        for (AlternativaDTO alternativaDTO : dto.getAlternativas()) {
+        for (Alternativa Alternativa : dto.getAlternativas()) {
             Alternativa alternativa = new Alternativa();
-            alternativa.setTexto(alternativaDTO.getTexto());
-            alternativa.setCorreto(alternativaDTO.isCorreto());
+            alternativa.setTexto(Alternativa.getTexto());
+            alternativa.setCorreto(Alternativa.isCorreto());
             alternativa.setDataCriacao(LocalDateTime.now());
             alternativa.setDataAtualizacao(LocalDateTime.now());
             alternativas.add(alternativa);
@@ -129,7 +127,7 @@ public class QuestaoService {
         return questao;
     }
 
-    public List<QuestaoDTO> getQuestoesByTema(String temaId) {
+    public List<Questao> getQuestoesByTema(String temaId) {
         List<Questao> questoes = questaoRepository.findByTemaId(temaId);
         return questoes.stream()
                 .map(this::toDTO)

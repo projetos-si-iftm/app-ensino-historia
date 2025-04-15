@@ -4,7 +4,7 @@ import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import lombok.RequiredArgsConstructor;
-import iftm.edu.br.questoes_api.models.Dto.TemaDTO;
+import iftm.edu.br.questoes_api.models.Tema;
 import iftm.edu.br.questoes_api.service.TemaService;
 
 @RestController
@@ -14,19 +14,19 @@ public class TemaController {
     private final TemaService temaService;
 
     @GetMapping
-    public List<TemaDTO> getAllTemas() {
+    public List<Tema> getAllTemas() {
         return temaService.getAllTemas();
     }
 
     @GetMapping("/{id}")
-    public TemaDTO getTemaById(@PathVariable String id) {
+    public Tema getTemaById(@PathVariable String id) {
         return temaService.getTemaById(id);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public TemaDTO saveTema(@RequestBody TemaDTO temaDTO) {
-        return temaService.saveTema(temaDTO);
+    public Tema saveTema(@RequestBody Tema Tema) {
+        return temaService.saveTema(Tema);
     }
 
     @DeleteMapping("/{id}")

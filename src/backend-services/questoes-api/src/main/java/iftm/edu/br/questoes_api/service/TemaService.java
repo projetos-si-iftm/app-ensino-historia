@@ -8,7 +8,6 @@ import lombok.RequiredArgsConstructor;
 import iftm.edu.br.questoes_api.exceptions.ResourceNotFoundException;
 import iftm.edu.br.questoes_api.exceptions.BadRequestException;
 import iftm.edu.br.questoes_api.models.Tema;
-import iftm.edu.br.questoes_api.models.Dto.TemaDTO;
 import iftm.edu.br.questoes_api.repositories.TemaRepository;
 
 @Service
@@ -16,23 +15,23 @@ import iftm.edu.br.questoes_api.repositories.TemaRepository;
 public class TemaService {
     private final TemaRepository temaRepository;
 
-    public List<TemaDTO> getAllTemas() {
+    public List<Tema> getAllTemas() {
         return temaRepository.findAll().stream()
                 .map(this::toDTO)
                 .collect(Collectors.toList());
     }
 
-    public TemaDTO getTemaById(String id) {
+    public Tema getTemaById(String id) {
         Tema tema = temaRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Tema não encontrado com ID: " + id));
         return toDTO(tema);
     }
 
-    public TemaDTO saveTema(TemaDTO temaDTO) {
-        if (temaDTO.getNome() == null || temaDTO.getNome().trim().isEmpty()) {
+    public Tema saveTema(Tema Tema) {
+        if (Tema.getNome() == null || Tema.getNome().trim().isEmpty()) {
             throw new BadRequestException("O nome do tema não pode estar vazio");
         }
-        Tema tema = toEntity(temaDTO);
+        Tema tema = toEntity(Tema);
         tema.setDataCriacao(LocalDateTime.now());
         tema.setDataAtualizacao(LocalDateTime.now());
         tema.setAtivo(true);
@@ -40,16 +39,16 @@ public class TemaService {
         return toDTO(savedTema);
     }
 
-    public TemaDTO updateTema(String id, TemaDTO temaDTO) {
+    public Tema updateTema(String id, Tema Tema) {
         if (!temaRepository.existsById(id)) {
             throw new ResourceNotFoundException("Tema não encontrado com ID: " + id);
         }
         Tema existingTema = temaRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Tema não encontrado com ID: " + id));
         
-        existingTema.setNome(temaDTO.getNome());
-        existingTema.setDescricao(temaDTO.getDescricao());
-        existingTema.setVisivel(temaDTO.isVisivel());
+        existingTema.setNome(Tema.getNome());
+        existingTema.setDescricao(Tema.getDescricao());
+        existingTema.setVisivel(Tema.isVisivel());
         existingTema.setDataAtualizacao(LocalDateTime.now());
         
         Tema updatedTema = temaRepository.save(existingTema);
@@ -64,8 +63,8 @@ public class TemaService {
     }
 
 
-    private TemaDTO toDTO(Tema tema) {
-        return new TemaDTO(
+    private Tema toDTO(Tema tema) {
+        return new Tema(
                 tema.getId(),
                 tema.getNome(),
                 tema.getDescricao(),
@@ -76,7 +75,7 @@ public class TemaService {
         );
     }
 
-    private Tema toEntity(TemaDTO dto) {
+    private Tema toEntity(Tema dto) {
         return new Tema(
                 dto.getId(),
                 dto.getNome(),

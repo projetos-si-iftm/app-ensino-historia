@@ -1,7 +1,6 @@
 package iftm.edu.br.questoes_api.service;
 
 import iftm.edu.br.questoes_api.models.Alternativa;
-import iftm.edu.br.questoes_api.models.Dto.AlternativaDTO;
 import iftm.edu.br.questoes_api.repositories.AlternativaRepository;
 import iftm.edu.br.questoes_api.exceptions.ResourceNotFoundException;
 import iftm.edu.br.questoes_api.exceptions.BadRequestException;
@@ -10,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -19,23 +17,23 @@ public class AlternativaService {
     @Autowired
     private AlternativaRepository alternativaRepository;
 
-    public List<AlternativaDTO> getAllAlternativas() {
+    public List<Alternativa> getAllAlternativas() {
         return alternativaRepository.findAll().stream()
                 .map(this::toDTO)
                 .collect(Collectors.toList());
     }
 
-    public AlternativaDTO getAlternativaById(String id) {
+    public Alternativa getAlternativaById(String id) {
         return alternativaRepository.findById(id)
             .map(this::toDTO)
             .orElseThrow(() -> new ResourceNotFoundException("Alternativa não encontrada com ID: " + id));
     }
 
-    public AlternativaDTO saveAlternativa(AlternativaDTO alternativaDTO) {
-        if (alternativaDTO.getTexto() == null || alternativaDTO.getTexto().trim().isEmpty()) {
+    public Alternativa saveAlternativa(Alternativa Alternativa) {
+        if (Alternativa.getTexto() == null || Alternativa.getTexto().trim().isEmpty()) {
             throw new BadRequestException("O texto da alternativa não pode estar vazio");
         }
-        Alternativa alternativa = toEntity(alternativaDTO);
+        Alternativa alternativa = toEntity(Alternativa);
         Alternativa savedAlternativa = alternativaRepository.save(alternativa);
         return toDTO(savedAlternativa);
     }
@@ -48,28 +46,28 @@ public class AlternativaService {
         return true;
     }
 
-    public AlternativaDTO updateAlternativa(String id, AlternativaDTO alternativaDTO) {
+    public Alternativa updateAlternativa(String id, Alternativa Alternativa) {
         if (!alternativaRepository.existsById(id)) {
             throw new ResourceNotFoundException("Alternativa não encontrada com ID: " + id);
         }
-        alternativaDTO.setId(id);
-        Alternativa alternativa = toEntity(alternativaDTO);
+        Alternativa.setId(id);
+        Alternativa alternativa = toEntity(Alternativa);
         Alternativa savedAlternativa = alternativaRepository.save(alternativa);
         return toDTO(savedAlternativa);
     }
 
-    private Alternativa toEntity(AlternativaDTO alternativaDTO) {
+    private Alternativa toEntity(Alternativa Alternativa) {
         Alternativa alternativa = new Alternativa();
-        alternativa.setId(alternativaDTO.getId());
-        alternativa.setTexto(alternativaDTO.getTexto());
-        alternativa.setCorreto(alternativaDTO.isCorreto());  
+        alternativa.setId(Alternativa.getId());
+        alternativa.setTexto(Alternativa.getTexto());
+        alternativa.setCorreto(Alternativa.isCorreto());  
         alternativa.setAtivo(true);
         
-        if (alternativaDTO.getId() == null) {
+        if (Alternativa.getId() == null) {
             alternativa.setDataCriacao(LocalDateTime.now());
             alternativa.setDataAtualizacao(LocalDateTime.now());
         } else {
-            Alternativa existingAlternativa = alternativaRepository.findById(alternativaDTO.getId())
+            Alternativa existingAlternativa = alternativaRepository.findById(Alternativa.getId())
                     .orElse(null);
             if (existingAlternativa != null) {
                 alternativa.setDataCriacao(existingAlternativa.getDataCriacao());
@@ -80,8 +78,8 @@ public class AlternativaService {
         return alternativa;
     }
 
-    private AlternativaDTO toDTO(Alternativa alternativa) {
-        return new AlternativaDTO(
+    private Alternativa toDTO(Alternativa alternativa) {
+        return new Alternativa(
                 alternativa.getId(),
                 alternativa.getTexto(),
                 alternativa.isCorreto(),

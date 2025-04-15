@@ -107,14 +107,4 @@ public class Questao {
     public void setAtivo(boolean ativo) {
         this.ativo = ativo;
     }
-
-    public void setTexto(String texto) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'setTexto'");
-    }
-
-    public String getTexto() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getTexto'");
-    }
 }
