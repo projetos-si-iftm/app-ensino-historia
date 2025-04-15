@@ -1,0 +1,80 @@
+###
+# Questões
+GET http://localhost:8081/api/v1/questoes
+
+###
+GET http://localhost:8081/api/v1/questoes/67a29d02c052ab7ad7b31fe1
+
+###
+POST http://localhost:8081/api/v1/questoes
+Content-Type: application/json
+
+{
+  "titulo": "Exemplo de Questão",
+  "enunciado": "Texto do enunciado",
+  "temaId": "12345",
+  "dificuldade": 1,
+  "alternativas": [
+    { "texto": "Alternativa 1", "correto": false },
+    { "texto": "Alternativa 2", "correto": true }
+  ],
+  "visivel": true
+}
+
+###
+GET http://localhost:8081/api/v1/questoes/tema/{{temaId}}
+
+###
+GET http://localhost:8081/api/v1/questoes/dificuldade/{{nivel}}
+
+###
+DELETE http://localhost:8081/api/v1/questoes/{{id}}
+
+###
+# Temas
+GET http://localhost:8081/api/v1/temas
+
+###
+GET http://localhost:8081/api/v1/temas/{{id}}
+
+###
+POST http://localhost:8081/api/v1/temas
+Content-Type: application/json
+
+{
+  "nome": "Exemplo de Tema",
+  "descricao": "Descrição do tema"
+}
+
+###
+DELETE http://localhost:8081/api/v1/temas/{{id}}
+
+###
+# Alternativas
+GET http://localhost:8081/api/v1/alternativas
+
+###
+GET http://localhost:8081/api/v1/alternativas/{{id}}
+
+###
+POST http://localhost:8081/api/v1/alternativas
+Content-Type: application/json
+
+{
+  "texto": "Exemplo de Alternativa",
+  "correto": true
+}
+
+###
+PUT http://localhost:8081/api/v1/alternativas/{{id}}
+Content-Type: application/json
+
+{
+  "texto": "Texto atualizado",
+  "correto": false
+}
+
+###
+DELETE http://localhost:8081/api/v1/alternativas/{{id}}
+
+
