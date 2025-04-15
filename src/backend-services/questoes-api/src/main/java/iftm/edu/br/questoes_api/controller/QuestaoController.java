@@ -8,7 +8,7 @@ import iftm.edu.br.questoes_api.models.Questao;
 import iftm.edu.br.questoes_api.service.QuestaoService;
 
 @RestController
-@RequestMapping("/questoes")
+@RequestMapping("/api/v1/questoes")
 @RequiredArgsConstructor
 public class QuestaoController {
     private final QuestaoService questaoService;

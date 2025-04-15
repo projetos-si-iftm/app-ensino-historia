@@ -19,14 +19,14 @@ public class AlternativaService {
 
     public List<Alternativa> getAllAlternativas() {
         return alternativaRepository.findAll().stream()
-                .map(this::toDTO)
+                // .map(this::toDTO)
                 .collect(Collectors.toList());
     }
 
     public Alternativa getAlternativaById(String id) {
         return alternativaRepository.findById(id)
-            .map(this::toDTO)
-            .orElseThrow(() -> new ResourceNotFoundException("Alternativa não encontrada com ID: " + id));
+                // .map(this::toDTO)
+                .orElseThrow(() -> new ResourceNotFoundException("Alternativa não encontrada com ID: " + id));
     }
 
     public Alternativa saveAlternativa(Alternativa Alternativa) {
@@ -53,16 +53,17 @@ public class AlternativaService {
         Alternativa.setId(id);
         Alternativa alternativa = toEntity(Alternativa);
         Alternativa savedAlternativa = alternativaRepository.save(alternativa);
-        return toDTO(savedAlternativa);
+        // return toDTO(savedAlternativa);
+        return savedAlternativa;
     }
 
     private Alternativa toEntity(Alternativa Alternativa) {
         Alternativa alternativa = new Alternativa();
         alternativa.setId(Alternativa.getId());
         alternativa.setTexto(Alternativa.getTexto());
-        alternativa.setCorreto(Alternativa.isCorreto());  
+        alternativa.setCorreto(Alternativa.isCorreto());
         alternativa.setAtivo(true);
-        
+
         if (Alternativa.getId() == null) {
             alternativa.setDataCriacao(LocalDateTime.now());
             alternativa.setDataAtualizacao(LocalDateTime.now());
@@ -74,7 +75,7 @@ public class AlternativaService {
             }
             alternativa.setDataAtualizacao(LocalDateTime.now());
         }
-        
+
         return alternativa;
     }
 
@@ -85,7 +86,6 @@ public class AlternativaService {
                 alternativa.isCorreto(),
                 alternativa.getDataCriacao(),
                 alternativa.getDataAtualizacao(),
-                alternativa.isAtivo()
-        );
+                alternativa.isAtivo());
     }
 }

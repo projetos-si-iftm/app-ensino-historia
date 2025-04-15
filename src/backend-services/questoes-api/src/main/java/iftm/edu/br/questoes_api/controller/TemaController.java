@@ -8,7 +8,7 @@ import iftm.edu.br.questoes_api.models.Tema;
 import iftm.edu.br.questoes_api.service.TemaService;
 
 @RestController
-@RequestMapping("/temas")
+@RequestMapping("/api/v1/temas")
 @RequiredArgsConstructor
 public class TemaController {
     private final TemaService temaService;

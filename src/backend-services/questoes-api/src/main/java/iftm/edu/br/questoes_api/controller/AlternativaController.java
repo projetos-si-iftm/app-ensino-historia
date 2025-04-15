@@ -9,7 +9,7 @@ import iftm.edu.br.questoes_api.models.Alternativa;
 import iftm.edu.br.questoes_api.service.AlternativaService;
 
 @RestController
-@RequestMapping("/api/alternativas")
+@RequestMapping("/api/v1/alternativas")
 @RequiredArgsConstructor
 public class AlternativaController {
     private final AlternativaService alternativaService;
