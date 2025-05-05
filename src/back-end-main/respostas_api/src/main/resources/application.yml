@@ -1,0 +1,7 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb+srv://williamalves:5rX5Sye3btjV30wb@cluster0.nvtdo.mongodb.net/
+      database: respostas-api
+server:
+  port: 8082

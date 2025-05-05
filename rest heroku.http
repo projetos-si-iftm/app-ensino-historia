@@ -9,24 +9,10 @@ GET https://fidiquem-questoes-api-043ed1794ea9.herokuapp.com/api/v1/questoes/67a
 POST https://fidiquem-questoes-api-043ed1794ea9.herokuapp.com/api/v1/questoes
 Content-Type: application/json
 
-{
-  "titulo": "Exemplo de Questão",
-  "enunciado": "Texto do enunciado",
-  "temaId": "67fe9b04238f512a2166f78a",
-  "dificuldade": 1,
-  "alternativas": [
-    { "texto": "Alternativa 1", "correto": false },
-    { "texto": "Alternativa 2", "correto": true }
-  ],
-  "visivel": true
-}
-
-
-
   {
     "titulo": "Capitanias Hereditárias",
     "enunciado": "Qual era o principal objetivo da implementação das Capitanias Hereditárias no Brasil Colônia?",
-    "temaId": "67fe9b04238f512a2166f78a",
+    "temaId": "6819461d2a41fe5d833155d6",
     "dificuldade": 1,
     "alternativas": [
       { "texto": "Explorar as riquezas do território espanhol", "correto": false },
@@ -37,11 +23,30 @@ Content-Type: application/json
     "visivel": true
   }
 
-  
+
+{
+  "titulo": "Exemplo de Questão",
+  "enunciado": "Texto do enunciado",
+  "temaId": "6819461d2a41fe5d833155d6",
+  "dificuldade": 1,
+  "alternativas": [
+    { "texto": "Alternativa 1", "correto": false },
+    { "texto": "Alternativa 2", "correto": true }
+  ],
+  "visivel": true
+}
+
+
+
+
+###
+POST https://fidiquem-questoes-api-043ed1794ea9.herokuapp.com/api/v1/questoes
+Content-Type: application/json
+
   {
     "titulo": "Economia Açucareira",
     "enunciado": "Qual foi a base da economia brasileira durante a maior parte do período colonial?",
-    "temaId": "67fe9b04238f512a2166f78a",
+    "temaId": "6819461d2a41fe5d833155d6",
     "dificuldade": 1,
     "alternativas": [
       { "texto": "A produção de petróleo", "correto": false },
@@ -51,10 +56,15 @@ Content-Type: application/json
     ],
     "visivel": true
   },
+
+###
+POST https://fidiquem-questoes-api-043ed1794ea9.herokuapp.com/api/v1/questoes
+Content-Type: application/json
+
   {
     "titulo": "Mão de obra escravizada",
     "enunciado": "Qual grupo foi amplamente escravizado para trabalhar nos engenhos de açúcar durante o Brasil Colônia?",
-    "temaId": "67fe9b04238f512a2166f78a",
+    "temaId": "6819461d2a41fe5d833155d6",
     "dificuldade": 1,
     "alternativas": [
       { "texto": "Imigrantes europeus", "correto": false },
@@ -67,7 +77,7 @@ Content-Type: application/json
   {
     "titulo": "Entradas e Bandeiras",
     "enunciado": "Qual era o principal objetivo das bandeiras paulistas no período colonial?",
-    "temaId": "67fe9b04238f512a2166f78a",
+    "temaId": "6819461d2a41fe5d833155d6",
     "dificuldade": 2,
     "alternativas": [
       { "texto": "Explorar o litoral brasileiro", "correto": false },
@@ -80,7 +90,7 @@ Content-Type: application/json
   {
     "titulo": "Invasões estrangeiras",
     "enunciado": "Qual foi a principal potência europeia que invadiu o Nordeste do Brasil no século XVII?",
-    "temaId": "67fe9b04238f512a2166f78a",
+    "temaId": "6819461d2a41fe5d833155d6",
     "dificuldade": 2,
     "alternativas": [
       { "texto": "Espanha", "correto": false },
@@ -93,7 +103,7 @@ Content-Type: application/json
   {
     "titulo": "Administração colonial",
     "enunciado": "O que foi o Governo-Geral, instituído em 1549 no Brasil Colônia?",
-    "temaId": "67fe9b04238f512a2166f78a",
+    "temaId": "6819461d2a41fe5d833155d6",
     "dificuldade": 2,
     "alternativas": [
       { "texto": "Uma forma de autogestão das capitanias", "correto": false },
@@ -106,7 +116,7 @@ Content-Type: application/json
   {
     "titulo": "Companhia de Jesus",
     "enunciado": "Qual foi o papel dos jesuítas no Brasil Colônia?",
-    "temaId": "67fe9b04238f512a2166f78a",
+    "temaId": "6819461d2a41fe5d833155d6",
     "dificuldade": 1,
     "alternativas": [
       { "texto": "Explorar as minas de ouro", "correto": false },
@@ -119,7 +129,7 @@ Content-Type: application/json
   {
     "titulo": "Ciclo do Ouro",
     "enunciado": "Durante o ciclo do ouro, qual região do Brasil se destacou pela mineração?",
-    "temaId": "67fe9b04238f512a2166f78a",
+    "temaId": "6819461d2a41fe5d833155d6",
     "dificuldade": 2,
     "alternativas": [
       { "texto": "Maranhão", "correto": false },
@@ -132,7 +142,7 @@ Content-Type: application/json
   {
     "titulo": "Revoltas Coloniais",
     "enunciado": "Qual foi uma das principais causas da Inconfidência Mineira?",
-    "temaId": "67fe9b04238f512a2166f78a",
+    "temaId": "6819461d2a41fe5d833155d6",
     "dificuldade": 3,
     "alternativas": [
       { "texto": "A luta pelo fim da escravidão", "correto": false },
@@ -145,7 +155,7 @@ Content-Type: application/json
   {
     "titulo": "Tratado de Tordesilhas",
     "enunciado": "Qual foi o objetivo do Tratado de Tordesilhas, assinado em 1494?",
-    "temaId": "67fe9b04238f512a2166f78a",
+    "temaId": "6819461d2a41fe5d833155d6",
     "dificuldade": 2,
     "alternativas": [
       { "texto": "Dividir as terras da América entre Portugal e Espanha", "correto": true },
@@ -178,13 +188,19 @@ POST https://fidiquem-questoes-api-043ed1794ea9.herokuapp.com/api/v1/temas
 Content-Type: application/json
 
 {
+    "nome": "História do Brasil",
+    "descricao": "Questões relacionadas à história do Brasil",
+    "imagem":"https://static.mundoeducacao.uol.com.br/mundoeducacao/2019/10/chegada-portugueses-brasil.jpg"
+}
+
+{
     "nome": "Astronomia",
     "descricao": "Questões relacionadas ao estudo do universo",
     "imagem":"https://humanidades.com/wp-content/uploads/2018/09/astronomia-1-e1580089616804.jpg"
 }
 
 ###
-DELETE https://fidiquem-questoes-api-043ed1794ea9.herokuapp.com/api/v1/temas/679d5971f407da6328b55882
+DELETE https://fidiquem-questoes-api-043ed1794ea9.herokuapp.com/api/v1/temas/6812d48eeb9c3d35d607da98
 
 ###
 # Alternativas ------------------------------------------------------------------------------------------------------------------------
