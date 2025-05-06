@@ -14,6 +14,7 @@ import iftm.edu.br.questao_api.models.Tema;
 import iftm.edu.br.questao_api.service.TemaService;
 
 @RestController
+@CrossOrigin(origins = "*") 
 @RequestMapping("/temas")
 @RequiredArgsConstructor
 public class TemaController {

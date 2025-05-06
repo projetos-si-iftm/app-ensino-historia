@@ -4,4 +4,4 @@ spring:
       uri: mongodb+srv://williamalves:5rX5Sye3btjV30wb@cluster0.nvtdo.mongodb.net/
       database: questoes-api
 server:
-  port: 8081
+  port: 8082
