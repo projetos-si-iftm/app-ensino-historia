@@ -73,12 +73,10 @@ public class TemaService {
             tema.getDataCriacao(),
             tema.getDataAtualizacao(),
             tema.isAtivo(),
-            tema.getNomeArquivo(),
-            tema.getTipoConteudo(),
-            tema.getDados()
+            tema.getImagem()
         );
     }
-    
+
     private Tema toEntity(TemaDTO dto) {
         return new Tema(
             dto.getId(),
@@ -88,12 +86,10 @@ public class TemaService {
             dto.getDataCriacao(),
             dto.getDataAtualizacao(),
             dto.isAtivo(),
-            dto.getNomeArquivo(),
-            dto.getTipoConteudo(),
-            dto.getDados()
+            dto.getImagem() // Atualizado para usar o campo correto
         );
     }
-
+    
     public Tema getTemaByIdEntity(String id) {
         return temaRepository.findById(id)
             .orElseThrow(() -> new ResourceNotFoundException("Tema não encontrado com ID: " + id));

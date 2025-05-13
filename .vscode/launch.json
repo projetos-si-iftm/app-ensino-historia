@@ -9,6 +9,16 @@
             "projectName": "questoes-api",
             "args": "",
             "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-QuestaoApplication<iftm.edu.br-questao_api>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "iftm.edu.br.questao_api.QuestaoApplication",
+            "projectName": "iftm.edu.br-questao_api",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
         }
     ]
 }

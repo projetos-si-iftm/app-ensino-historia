@@ -21,8 +21,5 @@ public class Tema {
     private LocalDateTime dataAtualizacao;
     private boolean ativo;
 
-    // Campos da imagem
-    private String nomeArquivo;
-    private String tipoConteudo; // Ex: "image/png"
-    private byte[] dados;        // Conteúdo da imagem em binário
+    private String imagem; //URL da imagem do tema
 }

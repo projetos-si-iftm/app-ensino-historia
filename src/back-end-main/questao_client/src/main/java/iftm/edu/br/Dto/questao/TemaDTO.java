@@ -16,8 +16,6 @@ public class TemaDTO {
     private LocalDateTime dataCriacao;
     private LocalDateTime dataAtualizacao;
     private boolean ativo;
-
-    private String nomeArquivo;
-    private String tipoConteudo;
-    private byte[] dados;
+    
+    private String imagem; //URL da imagem do tema
 }
