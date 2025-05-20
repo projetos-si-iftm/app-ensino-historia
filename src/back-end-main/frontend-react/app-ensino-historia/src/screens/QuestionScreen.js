@@ -25,7 +25,7 @@ const QuestionScreen = () => {
     useEffect(() => {
         const fetchQuestions = async () => {
             try {
-                const response = await fetch('http://localhost:8082/questoes');
+                const response = await fetch('http://localhost:8081/questoes');
                 const data = await response.json();
                 console.log('Dados de questoes:', data);
 
