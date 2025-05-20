@@ -35,7 +35,7 @@ const HomeScreen = () => {
                     title: item.descricao,
                     //level: 'Iniciante', // Ajuste conforme necessário
                     //questions: 10, // Ajuste conforme necessário
-                    image: "https://humanidades.com/wp-content/uploads/2018/09/astronomia-1-e1580089616804.jpg"
+                     image: { uri: `http://192.168.1.10:8082/uploads/${item.dados}` },
                 }));
 
                 setThemes(mappedThemes);
