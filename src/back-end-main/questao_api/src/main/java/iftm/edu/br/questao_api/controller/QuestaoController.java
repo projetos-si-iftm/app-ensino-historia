@@ -5,7 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import lombok.RequiredArgsConstructor;
-import iftm.edu.br.Dto.questao.QuestaoDTO;
+import iftm.edu.br.questao_api.models.dto.QuestaoDTO;
 import iftm.edu.br.questao_api.service.QuestaoService;
 
 @RestController

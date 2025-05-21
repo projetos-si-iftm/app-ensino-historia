@@ -10,8 +10,8 @@ import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
 
 import iftm.edu.br.questao_api.models.Questao;
-import iftm.edu.br.Dto.questao.AlternativaDTO;
-import iftm.edu.br.Dto.questao.QuestaoDTO;
+import iftm.edu.br.questao_api.models.dto.AlternativaDTO;
+import iftm.edu.br.questao_api.models.dto.QuestaoDTO;
 import iftm.edu.br.questao_api.exceptions.ResourceNotFoundException;
 import iftm.edu.br.questao_api.exceptions.BadRequestException;
 import iftm.edu.br.questao_api.models.Alternativa;

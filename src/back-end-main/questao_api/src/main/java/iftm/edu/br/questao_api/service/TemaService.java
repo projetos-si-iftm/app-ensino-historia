@@ -8,7 +8,7 @@ import lombok.RequiredArgsConstructor;
 import iftm.edu.br.questao_api.exceptions.ResourceNotFoundException;
 import iftm.edu.br.questao_api.exceptions.BadRequestException;
 import iftm.edu.br.questao_api.models.Tema;
-import iftm.edu.br.Dto.questao.TemaDTO;
+import iftm.edu.br.questao_api.models.dto.TemaDTO;
 import iftm.edu.br.questao_api.repositories.TemaRepository;
 
 @Service

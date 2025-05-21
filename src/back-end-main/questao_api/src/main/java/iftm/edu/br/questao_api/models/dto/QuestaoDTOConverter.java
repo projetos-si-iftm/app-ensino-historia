@@ -1,7 +1,5 @@
-package iftm.edu.br.questao_api.models.DTOConverter;
+package iftm.edu.br.questao_api.models.dto;
 
-import iftm.edu.br.Dto.questao.QuestaoDTO;
-import iftm.edu.br.Dto.questao.AlternativaDTO;
 import iftm.edu.br.questao_api.models.Questao;
 import iftm.edu.br.questao_api.models.Alternativa;
 

@@ -2,7 +2,7 @@ package iftm.edu.br.respostas_api.controller;
 
 import iftm.edu.br.respostas_api.models.Estatistica;
 import iftm.edu.br.respostas_api.service.EstatisticaService;
-import iftm.edu.br.Dto.respostas.EstatisticasDTO;
+import iftm.edu.br.respostas_api.models.dto.EstatisticasDTO;
 import iftm.edu.br.respostas_api.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

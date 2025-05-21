@@ -1,7 +1,7 @@
 package iftm.edu.br.questao_api.service;
 
 import iftm.edu.br.questao_api.models.Alternativa;
-import iftm.edu.br.Dto.questao.AlternativaDTO;
+import iftm.edu.br.questao_api.models.dto.AlternativaDTO;
 import iftm.edu.br.questao_api.repositories.AlternativaRepository;
 import iftm.edu.br.questao_api.exceptions.ResourceNotFoundException;
 import iftm.edu.br.questao_api.exceptions.BadRequestException;

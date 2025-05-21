@@ -19,6 +19,26 @@
             "projectName": "iftm.edu.br-questao_api",
             "args": "",
             "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-QuestaoApplication<questao_api>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "iftm.edu.br.questao_api.QuestaoApplication",
+            "projectName": "questao_api",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-Main<questao_client>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "iftm.edu.br.Main",
+            "projectName": "questao_client",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
         }
     ]
 }

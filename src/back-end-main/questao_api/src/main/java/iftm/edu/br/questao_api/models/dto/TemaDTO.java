@@ -1,4 +1,4 @@
-package iftm.edu.br.Dto.questao;
+package iftm.edu.br.questao_api.models.dto;
 
 import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;

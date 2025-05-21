@@ -1,4 +1,4 @@
-package iftm.edu.br.Dto.respostas;
+package iftm.edu.br.respostas_api.models.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

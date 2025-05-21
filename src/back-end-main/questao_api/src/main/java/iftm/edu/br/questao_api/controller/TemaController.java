@@ -6,8 +6,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import lombok.RequiredArgsConstructor;
-import iftm.edu.br.Dto.questao.TemaDTO;
 import iftm.edu.br.questao_api.models.Tema;
+import iftm.edu.br.questao_api.models.dto.TemaDTO;
 import iftm.edu.br.questao_api.service.TemaService;
 
 @RestController

@@ -1,6 +1,6 @@
 package iftm.edu.br.respostas_api.controller;
 
-import iftm.edu.br.Dto.respostas.RespostasDTO;
+import iftm.edu.br.respostas_api.models.dto.RespostasDTO;
 import iftm.edu.br.respostas_api.models.Estatistica;
 import iftm.edu.br.respostas_api.repositories.EstatisticaRepository;
 import iftm.edu.br.respostas_api.service.RespostasService;
