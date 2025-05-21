@@ -1,1 +1,1 @@
-web: java -Dserver.port=$PORT -jar target/*.jar
+web: java -Dserver.port=$PORT -jar src/back-end-main/questao_api/target/questao_api-0.0.1-SNAPSHOT.jar
