@@ -3,12 +3,11 @@ package com.nataliaarantes.iftm;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-import iftm.edu.br.Dto.Autenticacao.classroom.ClassroomDTO;
-import iftm.edu.br.Dto.Autenticacao.classroom.ClassroomResponseDTO;
-import iftm.edu.br.model.Classroom;
-import iftm.edu.br.model.Student;
-import iftm.edu.br.model.Teacher;
-
+import com.nataliaarantes.iftm.model.Classroom;
+import com.nataliaarantes.iftm.model.Student;
+import com.nataliaarantes.iftm.model.Teacher;
+import com.nataliaarantes.iftm.model.dto.classroom.ClassroomDTO;
+import com.nataliaarantes.iftm.model.dto.classroom.ClassroomResponseDTO;
 import com.nataliaarantes.iftm.repository.ClassroomRepository;
 import com.nataliaarantes.iftm.repository.UserRepository;
 import com.nataliaarantes.iftm.service.ClassroomService;

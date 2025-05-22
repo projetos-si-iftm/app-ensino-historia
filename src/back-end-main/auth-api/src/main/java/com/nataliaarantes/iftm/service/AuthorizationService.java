@@ -1,13 +1,12 @@
 package com.nataliaarantes.iftm.service;
 
-import iftm.edu.br.Dto.Autenticacao.login.LoginDTO;
-import iftm.edu.br.Dto.Autenticacao.login.LoginResponseDTO;
-import iftm.edu.br.Dto.Autenticacao.register.RegisterDTO;
-import iftm.edu.br.Dto.Autenticacao.register.RegisterResponseDTO;
-import iftm.edu.br.model.Student;
-import iftm.edu.br.model.Teacher;
-import iftm.edu.br.model.User;
-
+import com.nataliaarantes.iftm.model.Student;
+import com.nataliaarantes.iftm.model.Teacher;
+import com.nataliaarantes.iftm.model.User;
+import com.nataliaarantes.iftm.model.dto.login.LoginDTO;
+import com.nataliaarantes.iftm.model.dto.login.LoginResponseDTO;
+import com.nataliaarantes.iftm.model.dto.register.RegisterDTO;
+import com.nataliaarantes.iftm.model.dto.register.RegisterResponseDTO;
 import com.nataliaarantes.iftm.repository.ClassroomRepository;
 import com.nataliaarantes.iftm.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,4 +1,4 @@
-package iftm.edu.br.Dto.Autenticacao.login;
+package com.nataliaarantes.iftm.model.dto.token;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -7,8 +7,8 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
-public class LoginResponseDTO {
+@NoArgsConstructor
+public class ValidateTokenDTO {
   private String token;
 }

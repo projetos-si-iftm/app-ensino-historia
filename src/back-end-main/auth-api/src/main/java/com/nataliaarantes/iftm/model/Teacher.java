@@ -1,11 +1,10 @@
-package iftm.edu.br.model;
+package com.nataliaarantes.iftm.model;
 
 import lombok.*;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
-import iftm.edu.br.model.User;
 
 import java.util.Collection;
 import java.util.List;

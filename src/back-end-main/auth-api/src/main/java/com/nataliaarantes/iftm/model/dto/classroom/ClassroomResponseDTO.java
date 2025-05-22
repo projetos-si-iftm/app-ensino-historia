@@ -1,7 +1,7 @@
-package iftm.edu.br.Dto.Autenticacao.classroom;
+package com.nataliaarantes.iftm.model.dto.classroom;
 
-import iftm.edu.br.model.Classroom;
-import iftm.edu.br.Dto.Autenticacao.user.Student.StudentResponseDTO;
+import com.nataliaarantes.iftm.model.Classroom;
+import com.nataliaarantes.iftm.model.dto.user.Student.StudentResponseDTO;
 import lombok.*;
 
 import java.util.List;

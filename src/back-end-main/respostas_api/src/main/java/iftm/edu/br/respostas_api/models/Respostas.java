@@ -5,7 +5,8 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import iftm.edu.br.model.Student;
+import com.nataliaarantes.iftm.model.Student;
+
 import iftm.edu.br.questao_api.models.Alternativa;
 import iftm.edu.br.questao_api.models.Questao;
 

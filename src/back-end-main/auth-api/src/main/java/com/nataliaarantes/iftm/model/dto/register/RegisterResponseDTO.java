@@ -1,4 +1,4 @@
-package iftm.edu.br.Dto.Autenticacao.register;
+package com.nataliaarantes.iftm.model.dto.register;
 
 import lombok.*;
 

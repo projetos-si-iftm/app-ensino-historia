@@ -1,4 +1,4 @@
-package iftm.edu.br.model;
+package com.nataliaarantes.iftm.model;
 
 import lombok.*;
 import org.springframework.data.mongodb.core.mapping.Document;

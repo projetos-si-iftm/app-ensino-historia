@@ -1,18 +1,17 @@
-package iftm.edu.br.Dto.Autenticacao.register;
+package com.nataliaarantes.iftm.model.dto.user;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.With;
 
 @Data
-@With
-@AllArgsConstructor
 @NoArgsConstructor
-public class RegisterDTO {
-  private String name;
+@AllArgsConstructor
+@Builder
+public class UserDTO {
   private String email;
   private String password;
-  private boolean isTeacher;
+  private String name;
   private String classId;
 }

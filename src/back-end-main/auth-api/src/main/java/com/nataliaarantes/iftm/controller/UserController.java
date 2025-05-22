@@ -1,7 +1,7 @@
 package com.nataliaarantes.iftm.controller;
 
-import iftm.edu.br.Dto.Autenticacao.user.UserDTO;
-import iftm.edu.br.Dto.Autenticacao.user.UserResponseDTO;
+import com.nataliaarantes.iftm.model.dto.user.UserDTO;
+import com.nataliaarantes.iftm.model.dto.user.UserResponseDTO;
 import com.nataliaarantes.iftm.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatusCode;

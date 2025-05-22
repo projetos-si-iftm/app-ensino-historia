@@ -1,4 +1,4 @@
-package iftm.edu.br.Dto.Autenticacao.login;
+package com.nataliaarantes.iftm.model.dto.login;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
