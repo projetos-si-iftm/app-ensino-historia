@@ -1,4 +1,4 @@
-package iftm.edu.br.questao_api;
+package iftm.edu.br.questoes-api;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class QuestaoApplicationTests {
 
 	public static void main(String[] args) {
-		SpringApplication.run(QuestaoApplication.class, args);
+		 SpringApplication.run(QuestoesApiApplication.class, args);
 	}
 
 }

@@ -1,4 +1,4 @@
-package iftm.edu.br.questao_api;
+package iftm.edu.br.questoes_api;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -7,10 +7,10 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @SpringBootApplication
-public class QuestaoApplication {
+public class QuestoesApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(QuestaoApplication.class, args);
+		SpringApplication.run(QuestoesApplication.class, args);
 	}
 
     // Configuração global de CORS

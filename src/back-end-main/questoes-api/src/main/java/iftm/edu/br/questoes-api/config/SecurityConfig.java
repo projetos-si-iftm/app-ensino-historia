@@ -1,4 +1,4 @@
-package iftm.edu.br.questao_api.config;
+package iftm.edu.br.questoes_api.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

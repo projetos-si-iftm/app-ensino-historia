@@ -1,4 +1,4 @@
-package iftm.edu.br.questao_api.controller;
+package iftm.edu.br.questoes_api.controller;
 
 import java.util.List;
 import org.springframework.http.HttpStatus;
