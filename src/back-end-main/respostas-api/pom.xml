@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>iftm.edu.br</groupId>
-	<artifactId>respostas_api</artifactId>
+	<artifactId>respostas-api</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>respostas_api</name>
+	<name>respostas-api</name>
 	<description>Demo project for Spring Boot</description>
 	<url/>
 	<licenses>
