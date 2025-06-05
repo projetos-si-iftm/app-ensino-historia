@@ -35,7 +35,7 @@ export default function RegisterScreen() {
 
   const handleRegister = async () => {
     try {
-      const response = await axios.post('http://localhost:8080/autenticacao/auth/register', form);
+      const response = await axios.post('http://localhost:8081/autenticacao/auth/register', form);
       Alert.alert('Sucesso', 'Conta criada com sucesso!');
       navigation.replace('Login');
     } catch (error) {

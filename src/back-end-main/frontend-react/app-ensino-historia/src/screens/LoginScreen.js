@@ -17,7 +17,7 @@ const LoginScreen = () => {
 
   const handleLogin = async () => {
     try {
-      const response = await axios.post('http://localhost:8083/auth/login', {
+      const response = await axios.post('http://localhost:8081/auth/login', {
         email: form.email,
         password: form.password
       });
@@ -62,7 +62,8 @@ const LoginScreen = () => {
           <TouchableOpacity onPress={() => handleChange('remember', !form.remember)} style={styles.checkboxLabel}>
             <Text>{form.remember ? '☑' : '☐'} Lembrar informações</Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => alert('Funcionalidade de esqueci a senha vai aqui')} style={styles.link}>
+          {/* AQUI É ONDE VOCÊ FAZ A NAVEGAÇÃO PARA ForgotPasswordScreen */}
+          <TouchableOpacity onPress={() => navigation.navigate('ForgotPassword')} style={styles.link}>
             <Text style={{color: '#00a868'}}>Esqueceu a senha?</Text>
           </TouchableOpacity>
         </View>

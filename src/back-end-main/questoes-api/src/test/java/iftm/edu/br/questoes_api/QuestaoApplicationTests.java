@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class QuestaoApplicationTests {
 
 	public static void main(String[] args) {
-		 SpringApplication.run(QuestoesApiApplication.class, args);
+		 SpringApplication.run(QuestoesApplication.class, args);
 	}
 
 }
