@@ -5,8 +5,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import lombok.RequiredArgsConstructor;
-import iftm.edu.br.questao_api.models.dto.AlternativaDTO;
-import iftm.edu.br.questao_api.service.AlternativaService;
+import iftm.edu.br.questoes_api.models.dto.AlternativaDTO;
+import iftm.edu.br.questoes_api.service.AlternativaService;
 
 @RestController
 @RequestMapping("/alternativas")

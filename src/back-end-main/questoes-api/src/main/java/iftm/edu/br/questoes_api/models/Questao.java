@@ -1,4 +1,4 @@
-package iftm.edu.br.questao_api.models;
+package iftm.edu.br.questoes_api.models;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;

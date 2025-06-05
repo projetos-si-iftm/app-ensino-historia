@@ -1,10 +1,10 @@
-package iftm.edu.br.questao_api.repositories;
+package iftm.edu.br.questoes_api.repositories;
 
 import java.util.List;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
-import iftm.edu.br.questao_api.models.Questao;
+import iftm.edu.br.questoes_api.models.Questao;
 
 
 @Repository

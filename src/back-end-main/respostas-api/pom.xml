@@ -75,7 +75,7 @@
     
 		<dependency>
             <groupId>iftm.edu.br</groupId>
-            <artifactId>questao_api</artifactId>
+            <artifactId>questoes-api</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
 

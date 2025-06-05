@@ -1,15 +1,15 @@
-package iftm.edu.br.questao_api.service;
+package iftm.edu.br.questoes_api.service;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
-import iftm.edu.br.questao_api.exceptions.ResourceNotFoundException;
-import iftm.edu.br.questao_api.exceptions.BadRequestException;
-import iftm.edu.br.questao_api.models.Tema;
-import iftm.edu.br.questao_api.models.dto.TemaDTO;
-import iftm.edu.br.questao_api.repositories.TemaRepository;
+import iftm.edu.br.questoes_api.exceptions.ResourceNotFoundException;
+import iftm.edu.br.questoes_api.exceptions.BadRequestException;
+import iftm.edu.br.questoes_api.models.Tema;
+import iftm.edu.br.questoes_api.models.dto.TemaDTO;
+import iftm.edu.br.questoes_api.repositories.TemaRepository;
 
 @Service
 @RequiredArgsConstructor

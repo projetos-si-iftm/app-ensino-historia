@@ -1,10 +1,10 @@
-package iftm.edu.br.questao_api.service;
+package iftm.edu.br.questoes_api.service;
 
-import iftm.edu.br.questao_api.models.Alternativa;
-import iftm.edu.br.questao_api.models.dto.AlternativaDTO;
-import iftm.edu.br.questao_api.repositories.AlternativaRepository;
-import iftm.edu.br.questao_api.exceptions.ResourceNotFoundException;
-import iftm.edu.br.questao_api.exceptions.BadRequestException;
+import iftm.edu.br.questoes_api.models.Alternativa;
+import iftm.edu.br.questoes_api.models.dto.AlternativaDTO;
+import iftm.edu.br.questoes_api.repositories.AlternativaRepository;
+import iftm.edu.br.questoes_api.exceptions.ResourceNotFoundException;
+import iftm.edu.br.questoes_api.exceptions.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

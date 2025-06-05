@@ -1,4 +1,4 @@
-package iftm.edu.br.questao_api.exceptions;
+package iftm.edu.br.questoes_api.exceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -7,8 +7,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.nataliaarantes.iftm.model.Student;
 
-import iftm.edu.br.questao_api.models.Alternativa;
-import iftm.edu.br.questao_api.models.Questao;
+import iftm.edu.br.questoes_api.models.Alternativa;
+import iftm.edu.br.questoes_api.models.Questao;
 
 import java.time.LocalDateTime;
 import java.util.UUID;

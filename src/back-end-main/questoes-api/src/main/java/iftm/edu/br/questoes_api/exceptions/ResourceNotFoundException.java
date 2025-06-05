@@ -1,4 +1,4 @@
-package iftm.edu.br.questao_api.exceptions;
+package iftm.edu.br.questoes_api.exceptions;
 
 public class ResourceNotFoundException extends RuntimeException {
     public ResourceNotFoundException(String message) {

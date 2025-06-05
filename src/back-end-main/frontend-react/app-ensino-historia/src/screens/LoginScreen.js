@@ -1,95 +1,203 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { login } from '../services/auth';
+import axios from 'axios';
+import { useNavigation } from '@react-navigation/native'; // Importe o hook useNavigation
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image } from 'react-native'; // Importe os componentes do React Native
 
-const LoginScreen = ({ navigation }) => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [showPassword, setShowPassword] = useState(false);
-    const [remember, setRemember] = useState(false);
+// Renomeei para LoginScreen para seguir a convenção de nomeclatura dos seus outros arquivos de tela
+const LoginScreen = () => {
+  const [form, setForm] = useState({ email: '', password: '', remember: false });
+  const navigation = useNavigation(); // Inicialize o useNavigation
 
-    const handleLogin = async () => {
-        try {
-            const data = await login(email, password);
-            Alert.alert('Sucesso', 'Login realizado!');
-            console.log(data);
-        } catch (error) {
-            Alert.alert('Erro', 'Falha ao fazer login, verifique suas credenciais.');
-        }
-    };
+  const handleChange = (name, value) => {
+    setForm(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
 
-    return (
-        <View style={styles.container}>
-            <Text style={styles.label}>Informações da conta:</Text>
-            <TextInput
-                style={styles.input}
-                placeholder="E-mail ou telefone"
-                value={email}
-                onChangeText={setEmail}
-                keyboardType="email-address"
-                autoCapitalize="none"
-            />
-            <View style={styles.passwordContainer}>
-                <TextInput
-                    style={styles.inputPassword}
-                    placeholder="Senha"
-                    value={password}
-                    onChangeText={setPassword}
-                    secureTextEntry={!showPassword}
-                />
-                <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
-                    <Icon name={showPassword ? "eye-off" : "eye"} size={24} color="gray" />
-                </TouchableOpacity>
-            </View>
-            
-            <View style={styles.rememberContainer}>
-                <TouchableOpacity onPress={() => setRemember(!remember)}>
-                    <Icon name={remember ? "checkbox-marked" : "checkbox-blank-outline"} size={20} color="black" />
-                </TouchableOpacity>
-                <Text style={styles.rememberText}>Lembrar informações</Text>
-                <TouchableOpacity>
-                    <Text style={styles.forgotPassword}>Esqueceu a senha?</Text>
-                </TouchableOpacity>
-            </View>
+  const handleLogin = async () => {
+    try {
+      const response = await axios.post('http://localhost:8083/auth/login', {
+        email: form.email,
+        password: form.password
+      });
+      console.log('Login bem-sucedido:', response.data);
+      
+      navigation.navigate('Home');
+    } catch (err) {
+      console.error('Erro de login:', err);
+      alert('E-mail ou senha inválidos');
+    }
+  };
 
-            <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
-                <Text style={styles.loginButtonText}>Entrar</Text>
-            </TouchableOpacity>
-            
-            <Text style={styles.orText}>ou</Text>
+  const handleGoogleLogin = () => {
+    alert('O login com Google precisa de uma implementação nativa para React Native (ex: via Expo Auth Sessions ou bibliotecas OAuth).');
+  };
 
-            <TouchableOpacity style={styles.googleButton}>
-                <Icon name="google" size={20} color="white" />
-                <Text style={styles.googleButtonText}>Entrar com Google</Text>
-            </TouchableOpacity>
+  return (
+    <View style={styles.container}>
+      <View style={styles.formContainer}>
+        <Text style={styles.title}>Informações da conta:</Text>
 
-            <View style={styles.signupContainer}>
-                <Text>Ainda não tem uma conta?</Text>
-                <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
-                    <Text style={styles.signupText}> Criar conta</Text>
-                </TouchableOpacity>
-            </View>
+        <TextInput
+          placeholder="E-mail ou telefone"
+          value={form.email}
+          onChangeText={(text) => handleChange('email', text)} // Use onChangeText para TextInput
+          style={styles.input}
+          keyboardType="email-address"
+          autoCapitalize="none"
+        />
+        <View style={styles.passwordWrapper}>
+          <TextInput
+            placeholder="Senha"
+            value={form.password}
+            onChangeText={(text) => handleChange('password', text)} // Use onChangeText para TextInput
+            style={{ ...styles.input, marginBottom: 0 }}
+            secureTextEntry // Para ocultar a senha
+          />
+          <Text style={styles.eyeIcon}>👁️</Text>
         </View>
-    );
+
+        <View style={styles.row}>
+          <TouchableOpacity onPress={() => handleChange('remember', !form.remember)} style={styles.checkboxLabel}>
+            <Text>{form.remember ? '☑' : '☐'} Lembrar informações</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => alert('Funcionalidade de esqueci a senha vai aqui')} style={styles.link}>
+            <Text style={{color: '#00a868'}}>Esqueceu a senha?</Text>
+          </TouchableOpacity>
+        </View>
+
+        <TouchableOpacity onPress={handleLogin} style={styles.loginButton}>
+          <Text style={styles.loginButtonText}>Entrar</Text>
+        </TouchableOpacity>
+
+        <View style={styles.dividerContainer}>
+          <View style={styles.hr} />
+          <Text style={styles.ou}>ou</Text>
+          <View style={styles.hr} />
+        </View>
+
+        <TouchableOpacity onPress={handleGoogleLogin} style={styles.googleButton}>
+          {/* Para um ícone Google, você precisará usar uma imagem local ou uma biblioteca de ícones */}
+          <Text style={{ fontSize: 20 }}>G</Text>
+          <Text>Entrar com Google</Text>
+        </TouchableOpacity>
+
+        <Text style={styles.footerText}>
+          Ainda não tem uma conta?{' '}
+          {/* AQUI ESTÁ A CORREÇÃO PRINCIPAL: Usando navigation.navigate */}
+          <Text style={styles.createLink} onPress={() => navigation.navigate('Register')}>
+            Criar conta
+          </Text>
+        </Text>
+      </View>
+    </View>
+  );
 };
 
+// Adaptei seus estilos para a sintaxe do React Native (StyleSheet.create)
 const styles = StyleSheet.create({
-    container: { flex: 1, padding: 20, justifyContent: 'center' },
-    label: { fontSize: 16, marginBottom: 10 },
-    input: { borderWidth: 1, borderColor: '#ccc', padding: 10, borderRadius: 5, marginBottom: 10 },
-    passwordContainer: { flexDirection: 'row', alignItems: 'center', borderWidth: 1, borderColor: '#ccc', padding: 10, borderRadius: 5, marginBottom: 10 },
-    inputPassword: { flex: 1 },
-    rememberContainer: { flexDirection: 'row', alignItems: 'center', marginBottom: 20 },
-    rememberText: { marginLeft: 5 },
-    forgotPassword: { color: 'green', marginLeft: 'auto' },
-    loginButton: { backgroundColor: 'green', padding: 15, borderRadius: 5, alignItems: 'center' },
-    loginButtonText: { color: 'white', fontSize: 16 },
-    orText: { textAlign: 'center', marginVertical: 10 },
-    googleButton: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', backgroundColor: '#4285F4', padding: 15, borderRadius: 5 },
-    googleButtonText: { color: 'white', marginLeft: 10, fontSize: 16 },
-    signupContainer: { flexDirection: 'row', justifyContent: 'center', marginTop: 20 },
-    signupText: { color: 'green', fontWeight: 'bold' },
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#fff'
+  },
+  formContainer: {
+    width: '90%',
+    maxWidth: 360,
+    padding: 20,
+    display: 'flex',
+    flexDirection: 'column'
+  },
+  title: {
+    marginBottom: 10,
+    fontSize: 20,
+    fontWeight: 'bold',
+  },
+  input: {
+    padding: 12,
+    marginBottom: 10,
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: '#ccc',
+    fontSize: 14
+  },
+  passwordWrapper: {
+    position: 'relative',
+    marginBottom: 10
+  },
+  eyeIcon: {
+    position: 'absolute',
+    right: 12,
+    top: '50%',
+    transform: [{ translateY: -10 }],
+  },
+  row: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    fontSize: 13,
+    marginBottom: 10
+  },
+  checkboxLabel: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 6,
+  },
+  link: {
+    // A cor é aplicada diretamente no componente Text aninhado
+  },
+  loginButton: {
+    padding: 12,
+    backgroundColor: '#00a868',
+    borderRadius: 8,
+    marginBottom: 10
+  },
+  loginButtonText: {
+    color: '#fff',
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  dividerContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginVertical: 10
+  },
+  hr: {
+    flex: 1,
+    borderTopWidth: 1,
+    borderColor: '#ccc'
+  },
+  ou: {
+    marginHorizontal: 10,
+    fontSize: 13,
+    color: '#999'
+  },
+  googleButton: {
+    padding: 10,
+    backgroundColor: '#fff',
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 8,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 10,
+    marginBottom: 10
+  },
+  googleIcon: {
+    width: 20,
+    height: 20
+  },
+  footerText: {
+    textAlign: 'center',
+    fontSize: 14
+  },
+  createLink: {
+    color: '#00a868',
+    fontWeight: 'bold'
+  }
 });
 
 export default LoginScreen;

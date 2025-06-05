@@ -2,11 +2,11 @@ package iftm.edu.br.respostas_api.service;
 
 import iftm.edu.br.respostas_api.models.Respostas;
 import iftm.edu.br.respostas_api.repositories.RespostasRepository;
-import iftm.edu.br.questao_api.repositories.QuestaoRepository;
-import iftm.edu.br.questao_api.models.Questao;
+import iftm.edu.br.questoes_api.repositories.QuestaoRepository;
+import iftm.edu.br.questoes_api.models.Questao;
 import iftm.edu.br.respostas_api.models.dto.RespostasDTO;
-import iftm.edu.br.questao_api.models.Alternativa;
-import iftm.edu.br.questao_api.repositories.AlternativaRepository;
+import iftm.edu.br.questoes_api.models.Alternativa;
+import iftm.edu.br.questoes_api.repositories.AlternativaRepository;
 import iftm.edu.br.respostas_api.repositories.EstatisticaRepository;
 import iftm.edu.br.respostas_api.models.Estatistica;
 import org.springframework.stereotype.Service;

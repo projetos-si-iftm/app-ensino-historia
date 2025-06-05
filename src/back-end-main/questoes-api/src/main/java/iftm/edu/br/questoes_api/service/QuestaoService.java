@@ -1,4 +1,4 @@
-package iftm.edu.br.questao_api.service;
+package iftm.edu.br.questoes_api.service;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -9,14 +9,14 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
 
-import iftm.edu.br.questao_api.models.Questao;
-import iftm.edu.br.questao_api.models.dto.AlternativaDTO;
-import iftm.edu.br.questao_api.models.dto.QuestaoDTO;
-import iftm.edu.br.questao_api.exceptions.ResourceNotFoundException;
-import iftm.edu.br.questao_api.exceptions.BadRequestException;
-import iftm.edu.br.questao_api.models.Alternativa;
-import iftm.edu.br.questao_api.repositories.QuestaoRepository;
-import iftm.edu.br.questao_api.repositories.AlternativaRepository;
+import iftm.edu.br.questoes_api.models.Questao;
+import iftm.edu.br.questoes_api.models.dto.AlternativaDTO;
+import iftm.edu.br.questoes_api.models.dto.QuestaoDTO;
+import iftm.edu.br.questoes_api.exceptions.ResourceNotFoundException;
+import iftm.edu.br.questoes_api.exceptions.BadRequestException;
+import iftm.edu.br.questoes_api.models.Alternativa;
+import iftm.edu.br.questoes_api.repositories.QuestaoRepository;
+import iftm.edu.br.questoes_api.repositories.AlternativaRepository;
 
 @Service
 @RequiredArgsConstructor

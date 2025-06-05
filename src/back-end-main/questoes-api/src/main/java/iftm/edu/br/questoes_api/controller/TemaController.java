@@ -1,4 +1,4 @@
-package iftm.edu.br.questao_api.controller;
+package iftm.edu.br.questoes_api.controller;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -6,9 +6,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import lombok.RequiredArgsConstructor;
-import iftm.edu.br.questao_api.models.Tema;
-import iftm.edu.br.questao_api.models.dto.TemaDTO;
-import iftm.edu.br.questao_api.service.TemaService;
+import iftm.edu.br.questoes_api.models.Tema;
+import iftm.edu.br.questoes_api.models.dto.TemaDTO;
+import iftm.edu.br.questoes_api.service.TemaService;
 
 @RestController
 @CrossOrigin(origins = "*")
