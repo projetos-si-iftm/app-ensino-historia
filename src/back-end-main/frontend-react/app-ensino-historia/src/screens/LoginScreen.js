@@ -2,11 +2,13 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigation } from '@react-navigation/native'; // Importe o hook useNavigation
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image } from 'react-native'; // Importe os componentes do React Native
+import { useAuth } from '../contexts/AuthContext';
 
 // Renomeei para LoginScreen para seguir a convenção de nomeclatura dos seus outros arquivos de tela
 const LoginScreen = () => {
   const [form, setForm] = useState({ email: '', password: '', remember: false });
   const navigation = useNavigation(); // Inicialize o useNavigation
+  const { login } = useAuth();
 
   const handleChange = (name, value) => {
     setForm(prev => ({
@@ -22,7 +24,7 @@ const LoginScreen = () => {
         password: form.password
       });
       console.log('Login bem-sucedido:', response.data);
-      
+
       navigation.navigate('Home');
     } catch (err) {
       console.error('Erro de login:', err);
@@ -64,7 +66,7 @@ const LoginScreen = () => {
           </TouchableOpacity>
           {/* AQUI É ONDE VOCÊ FAZ A NAVEGAÇÃO PARA ForgotPasswordScreen */}
           <TouchableOpacity onPress={() => navigation.navigate('ForgotPassword')} style={styles.link}>
-            <Text style={{color: '#00a868'}}>Esqueceu a senha?</Text>
+            <Text style={{ color: '#00a868' }}>Esqueceu a senha?</Text>
           </TouchableOpacity>
         </View>
 

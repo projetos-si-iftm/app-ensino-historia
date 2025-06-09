@@ -37,16 +37,16 @@ export const AuthProvider = ({ children }) => {
       }
     };
     loadUser();
-  }, []);
+  }, []); // O array vazio garante que o useEffect rode apenas uma vez ao montar o componente
 
   return (
-    <AuthContext.Provider value={{ user, login, logout, loading }}>
+    <AuthContext.Provider value={{ user, loading, login, logout }}>
       {children}
     </AuthContext.Provider>
   );
 };
 
-// Hook personalizado para usar o contexto
+// Hook personalizado para facilitar o uso do contexto
 export const useAuth = () => {
   return useContext(AuthContext);
 };
