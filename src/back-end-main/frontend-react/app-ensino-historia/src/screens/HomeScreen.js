@@ -12,6 +12,8 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 //     { id: '6', title: 'Imperialismo século XIX', level: 'Veterano', questions: 10, image: require('../../assets/imperialismo.png') },
 // ];
 
+//teste de commit
+
 const difficultyImages = {
     'Iniciante': require('../../assets/iniciante.png'),
     'Veterano': require('../../assets/veterano.png'),
