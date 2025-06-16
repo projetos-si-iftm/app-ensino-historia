@@ -1,11 +1,11 @@
 package com.nataliaarantes.iftm.controller;
 
 
-import iftm.edu.br.Dto.Autenticacao.login.LoginDTO;
-import iftm.edu.br.Dto.Autenticacao.login.LoginResponseDTO;
-import iftm.edu.br.Dto.Autenticacao.register.RegisterDTO;
-import iftm.edu.br.Dto.Autenticacao.register.RegisterResponseDTO;
-import iftm.edu.br.Dto.Autenticacao.token.ValidateTokenDTO;
+import com.nataliaarantes.iftm.model.dto.login.LoginDTO;
+import com.nataliaarantes.iftm.model.dto.login.LoginResponseDTO;
+import com.nataliaarantes.iftm.model.dto.register.RegisterDTO;
+import com.nataliaarantes.iftm.model.dto.register.RegisterResponseDTO;
+import com.nataliaarantes.iftm.model.dto.token.ValidateTokenDTO;
 import com.nataliaarantes.iftm.service.AuthorizationService;
 import com.nataliaarantes.iftm.service.TokenService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,8 +1,8 @@
 package com.nataliaarantes.iftm.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import iftm.edu.br.Dto.Autenticacao.login.LoginResponseDTO;
-import iftm.edu.br.Dto.Autenticacao.register.RegisterDTO;
+import com.nataliaarantes.iftm.model.dto.login.LoginResponseDTO;
+import com.nataliaarantes.iftm.model.dto.register.RegisterDTO;
 import jakarta.servlet.http.HttpServletResponse;
 
 import com.nataliaarantes.iftm.service.AuthorizationService;

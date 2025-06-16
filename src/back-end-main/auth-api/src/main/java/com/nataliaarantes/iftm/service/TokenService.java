@@ -4,10 +4,9 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
-
-import iftm.edu.br.model.Student;
-import iftm.edu.br.model.Teacher;
-import iftm.edu.br.model.User;
+import com.nataliaarantes.iftm.model.Student;
+import com.nataliaarantes.iftm.model.Teacher;
+import com.nataliaarantes.iftm.model.User;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatusCode;

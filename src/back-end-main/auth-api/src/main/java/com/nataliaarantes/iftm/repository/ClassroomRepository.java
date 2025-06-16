@@ -3,7 +3,7 @@ package com.nataliaarantes.iftm.repository;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
-import iftm.edu.br.model.Classroom;
+import com.nataliaarantes.iftm.model.Classroom;
 
 import java.util.Optional;
 

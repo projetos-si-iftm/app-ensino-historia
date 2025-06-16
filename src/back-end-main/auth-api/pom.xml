@@ -86,12 +86,7 @@
 			<scope>test</scope>
 		</dependency>
 
-		<dependency>
-			<groupId>iftm.edu.br</groupId>
-			<artifactId>questao_client</artifactId>
-			<version>1.0-SNAPSHOT</version>
-		</dependency>
-		
+				
 	</dependencies>
 
 	<build>

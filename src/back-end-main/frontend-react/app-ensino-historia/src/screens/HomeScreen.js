@@ -1,16 +1,8 @@
-import React, { useState, useEffect } from 'react'; 
-import { View, Text, FlatList, TouchableOpacity, Image, StyleSheet } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, FlatList, TouchableOpacity, Image, StyleSheet, Button } from 'react-native'; // Importe Button para o botão Sair
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-
-// const themes = [
-//     { id: '1', title: 'Independência do Brasil', level: 'Mestre', questions: 10, image: require('../../assets/independencia.png') },
-//     { id: '2', title: 'I Reinado no Brasil', level: 'Iniciante', questions: 10, image: require('../../assets/reinado.png') },
-//     { id: '3', title: 'Período Regencial', level: 'Veterano', questions: 10, image: require('../../assets/regencial.png') },
-//     { id: '4', title: 'II Reinado no Brasil', level: 'Mestre', questions: 10, image: require('../../assets/reinado2.png') },
-//     { id: '5', title: 'Brasil I República', level: 'Iniciante', questions: 10, image: require('../../assets/republica.png') },
-//     { id: '6', title: 'Imperialismo século XIX', level: 'Veterano', questions: 10, image: require('../../assets/imperialismo.png') },
-// ];
+import { useAuth } from '../contexts/AuthContext'; // <--- Adicionado: Importe o hook useAuth
 
 //teste de commit
 
@@ -23,6 +15,7 @@ const difficultyImages = {
 const HomeScreen = () => {
     const [themes, setThemes] = useState([]);
     const navigation = useNavigation();
+    const { user, logout } = useAuth(); // <--- Adicionado: Obtenha o objeto 'user' e a função 'logout' do contexto
 
     useEffect(() => {
         const fetchThemes = async () => {
@@ -35,9 +28,9 @@ const HomeScreen = () => {
                 const mappedThemes = data.map(item => ({
                     id: item.id,
                     title: item.descricao,
-                    //level: 'Iniciante', // Ajuste conforme necessário
-                    //questions: 10, // Ajuste conforme necessário
-                    //image: { uri: `http://localhost:8082/uploads/${item.dados}` }, // URL da imagem
+                    //level: 'Iniciante', // Ajuste conforme necessário - Você pode buscar isso da API também
+                    //questions: 10, // Ajuste conforme necessário - Você pode buscar isso da API também
+                    image: { uri: `http://192.168.1.10:8082/uploads/${item.dados}` },
                 }));
 
                 setThemes(mappedThemes);
@@ -51,7 +44,6 @@ const HomeScreen = () => {
     const handleSelectTheme = (theme) => {
         navigation.navigate('Question', { theme });
     };
-    
 
     const renderItem = ({ item }) => (
         <TouchableOpacity style={styles.card} onPress={() => handleSelectTheme(item)}>
@@ -59,14 +51,16 @@ const HomeScreen = () => {
             <Text style={styles.title}>{item.title}</Text>
             <View style={styles.details}>
                 <View style={styles.difficultyContainer}>
-                    <Image source={difficultyImages[item.level]} style={styles.difficultyIcon} />
-                    <Text style={styles.level}>{item.level}</Text>
+                    {/* Exemplo de como você usaria 'level' se a API o fornecesse */}
+                    {/* {item.level && <Image source={difficultyImages[item.level]} style={styles.difficultyIcon} />} */}
+                    {/* {item.level && <Text style={styles.level}>{item.level}</Text>} */}
                 </View>
-                <Text style={styles.questions}>{item.questions} questões</Text>
+                {/* Exemplo de como você usaria 'questions' se a API o fornecesse */}
+                {/* {item.questions && <Text style={styles.questions}>{item.questions} questões</Text>} */}
             </View>
         </TouchableOpacity>
     );
-    
+
     return (
         <View style={styles.container}>
             <View style={styles.header}>
@@ -76,8 +70,16 @@ const HomeScreen = () => {
                     <Icon name="cog-outline" size={24} color="black" style={styles.icon} />
                 </View>
             </View>
-            <Text style={styles.welcomeMessage}>Olá, Olavo!</Text>
+
+            {/* <--- Modificado: Mensagem de boas-vindas com o nome do usuário logado */}
+            {user && user.name ? (
+                <Text style={styles.welcomeMessage}>Olá, {user.name}!</Text>
+            ) : (
+                <Text style={styles.welcomeMessage}>Olá!</Text>
+            )}
+
             <Text style={styles.subtitle}>Selecione qual tema gostaria de jogar:</Text>
+
             <FlatList
                 data={themes}
                 renderItem={renderItem}
@@ -85,6 +87,15 @@ const HomeScreen = () => {
                 numColumns={1}
                 contentContainerStyle={styles.list}
             />
+
+            {/* <--- Adicionado: Botão "Sair" */}
+            <View style={{ marginTop: 20, width: '100%', alignItems: 'center' }}>
+                <Button
+                    title="Sair"
+                    onPress={logout} // Chama a função de logout do contexto
+                    color="#FF6347" // Cor para o botão de sair
+                />
+            </View>
         </View>
     );
 };
@@ -109,21 +120,22 @@ const styles = StyleSheet.create({
         fontSize: 18,
         fontWeight: 'bold',
         textAlign: 'left',
-        flex: 1, // Permite que o texto ocupe o espaço necessário
+        flex: 1,
     },
     iconContainer: {
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'flex-end', // Alinha os ícones à direita
+        justifyContent: 'flex-end',
     },
     icon: {
-        marginLeft: 15, // Espaçamento entre os dois ícones
+        marginLeft: 15,
     },
-    welcomeMessage: {
-        fontSize: 16,
-        fontWeight: '600',
+    welcomeMessage: { // <--- Estilos adaptados para a mensagem de boas-vindas
+        fontSize: 20, // Um pouco maior para destaque
+        fontWeight: 'bold',
         color: '#333',
         marginVertical: 10,
+        textAlign: 'left', // Alinha à esquerda como o resto do texto
     },
     subtitle: {
         fontSize: 16,
@@ -174,4 +186,3 @@ const styles = StyleSheet.create({
 });
 
 export default HomeScreen;
-
